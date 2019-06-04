@@ -8,7 +8,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card mb-4">
                         <div class="card-body flexbox-b">
-                            <div class="easypie mr-4" data-percent="{{$return['approved_requests']*100/$return['total_requests']}}" data-bar-color="#ff4081" data-size="80" data-line-width="8">
+                            <div class="easypie mr-4" data-percent="@if($return['total_requests'] > 0){{$return['approved_requests']*100/$return['total_requests']}}@endif" data-bar-color="#ff4081" data-size="80" data-line-width="8">
                                 <span class="easypie-data text-pink" style="font-size:32px;"><i class="ti-help"></i></span>
                             </div>
                             <div>
@@ -25,7 +25,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card mb-4">
                         <div class="card-body flexbox-b">
-                            <div class="easypie mr-4" data-percent="{{$return['total_approved_money']*100/$return['total_requested_money']}}" data-bar-color="#18C5A9" data-size="80" data-line-width="8">
+                            <div class="easypie mr-4" data-percent="@if($return['total_requested_money'] > 0){{$return['total_approved_money']*100/$return['total_requested_money']}}@endif" data-bar-color="#18C5A9" data-size="80" data-line-width="8">
                                 <span class="easypie-data text-success" style="font-size:32px;"><i class="la la-money"></i></span>
                             </div>
                             <div>
