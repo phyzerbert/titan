@@ -8,7 +8,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card mb-4">
                         <div class="card-body flexbox-b">
-                            <div class="easypie mr-4" data-percent="{{$return['total_managers']*100/$return['total_users']}}" data-bar-color="#18C5A9" data-size="80" data-line-width="8">
+                            <div class="easypie mr-4" data-percent="@if($return['total_users'] > 0){{$return['total_managers']*100/$return['total_users']}}@endif" data-bar-color="#18C5A9" data-size="80" data-line-width="8">
                                 <span class="easypie-data text-success" style="font-size:32px;"><i class="la la-users"></i></span>
                             </div>
                             <div>
@@ -25,7 +25,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card mb-4">
                         <div class="card-body flexbox-b">
-                            <div class="easypie mr-4" data-percent="{{$return['completed_projects']*100/$return['total_projects']}}" data-bar-color="#5c6bc0" data-size="80" data-line-width="8">
+                            <div class="easypie mr-4" data-percent="@if($return['total_users'] > 0){{$return['completed_projects']*100/$return['total_projects']}}@endif" data-bar-color="#5c6bc0" data-size="80" data-line-width="8">
                                 <span class="easypie-data font-26 text-primary"><i class="ti-book"></i></span>
                             </div>
                             <div>
@@ -42,7 +42,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card mb-4">
                         <div class="card-body flexbox-b">
-                            <div class="easypie mr-4" data-percent="{{$return['approved_requests']*100/$return['total_requests']}}" data-bar-color="#ff4081" data-size="80" data-line-width="8">
+                            <div class="easypie mr-4" data-percent="@if($return['total_users'] > 0){{$return['approved_requests']*100/$return['total_requests']}}@endif" data-bar-color="#ff4081" data-size="80" data-line-width="8">
                                 <span class="easypie-data text-pink" style="font-size:32px;"><i class="ti-help"></i></span>
                             </div>
                             <div>
