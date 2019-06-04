@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\models\Project;
-use App\models\Request as MoneyRequest;
+use App\Models\Project;
+use App\Models\Request as MoneyRequest;
 
 use Auth;
 use Hash;
