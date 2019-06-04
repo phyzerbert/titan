@@ -25,7 +25,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card mb-4">
                         <div class="card-body flexbox-b">
-                            <div class="easypie mr-4" data-percent="@if($return['total_users'] > 0){{$return['completed_projects']*100/$return['total_projects']}}@endif" data-bar-color="#5c6bc0" data-size="80" data-line-width="8">
+                            <div class="easypie mr-4" data-percent="@if($return['total_projects'] > 0){{$return['completed_projects']*100/$return['total_projects']}}@endif" data-bar-color="#5c6bc0" data-size="80" data-line-width="8">
                                 <span class="easypie-data font-26 text-primary"><i class="ti-book"></i></span>
                             </div>
                             <div>
@@ -42,7 +42,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card mb-4">
                         <div class="card-body flexbox-b">
-                            <div class="easypie mr-4" data-percent="@if($return['total_users'] > 0){{$return['approved_requests']*100/$return['total_requests']}}@endif" data-bar-color="#ff4081" data-size="80" data-line-width="8">
+                            <div class="easypie mr-4" data-percent="@if($return['total_requests'] > 0){{$return['approved_requests']*100/$return['total_requests']}}@endif" data-bar-color="#ff4081" data-size="80" data-line-width="8">
                                 <span class="easypie-data text-pink" style="font-size:32px;"><i class="ti-help"></i></span>
                             </div>
                             <div>
