@@ -46,14 +46,14 @@
         <div class="text-center">
             <span class="auth-head-icon"><i class="la la-key"></i></span>
         </div>
-        @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
-        @endif
         <form class="ibox-body" id="login-form" action="{{ route('password.email') }}" method="POST">
             @csrf
             <h4 class="font-strong text-center mb-5">FORGOT PASSWORD</h4>
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
             <p class="mb-4">Enter your email address below and we'll send you password reset instructions.</p>
             <div class="form-group mb-4">
                 <input class="form-control form-control-line" type="email" name="email" value="{{ old('email') }}" placeholder="{{ __('E-Mail Address') }}" required autocomplete="email" autofocus />
