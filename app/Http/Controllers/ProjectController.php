@@ -24,7 +24,7 @@ class ProjectController extends Controller
         $managers = User::where('role_id', 3)->get();
         $companies = Company::all();
         $user = Auth::user();
-        if($user->role->slug == 'admin'){
+        if($user->role->slug == 'admin' || $user->role->slug == 'accountant'){
             $data =  Project::orderBy('created_at', 'desc')->paginate(10);
         }else if($user->role->slug == 'project_manager'){
             $data =  $user->projects()->orderBy('created_at', 'desc')->paginate(10);
@@ -171,15 +171,29 @@ class ProjectController extends Controller
     public function create_request(Request $request){
         $request->validate([
             'title' => 'required|string',
+            'project_id' => 'required',
             'course_id' => 'required',
             'amount' => 'required|numeric|min:0',
         ]);
+        $project =  Project::find($request->get('project_id'));
+        $consumed_money = $project->courses()->sum('amount');
+
         
         $item = new MoneyRequest();
         $item->title = $request->get('title');
         $item->user_id = Auth::user()->id;
         $item->course_id = $request->get('course_id');
+        $item->description = $request->get('description');
         $item->amount = $request->get('amount');
+        if($consumed_money + $request->get('amount') > $project->limit){
+            $item->exceed = 1;
+        }
+        if($request->file('attachment') != null){
+            $image = request()->file('attachment');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('uploaded/request_attachments'), $imageName);
+            $item->attachment = 'uploaded/request_attachments/'.$imageName;
+        }
         $item->save();
         return back()->with('success', 'Requested Successfully');
     }

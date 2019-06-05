@@ -18,12 +18,13 @@
         </div>
         <div class="page-content fade-in-up">
             <div class="ibox">
-                <div class="ibox-body">
-                    @if ($role == 'admin')                        
-                        <div class="text-right mb-4">
+                <div class="ibox-body">                   
+                    <div class="text-right mb-4">
+                        <a href="{{route('project.export')}}" id="btn-export" class="btn btn-info btn-fix"><span class="btn-icon"><i class="la la-file-excel-o"></i>Export</span></a>
+                        @if ($role == 'admin')     
                             <button type="button" id="btn-add" class="btn btn-primary btn-fix"><span class="btn-icon"><i class="ti-plus"></i>Add New</span></button>
-                        </div>
-                    @endif
+                        @endif
+                    </div>                    
                     <div class="table-responsive row">
                         <table class="table table-bordered table-hover" id="usersTable">
                             <thead class="thead-default thead-lg">
@@ -54,9 +55,8 @@
                                             @if ($role == 'admin')
                                                 <a class="btn btn-sm btn-info btn-fix btn-edit" data-id="{{$item->id}}"><span class="btn-icon text-white"><i class="la la-pencil"></i>Edit</span></a>
                                                 <a href="{{route('project.delete', $item->id)}}" class="btn btn-sm btn-danger btn-fix" onclick="return window.confirm('Are you sure?')"><span class="btn-icon text-white"><i class="la la-trash"></i>Remove</span></a>
-                                            @elseif($role == 'project_manager') 
-                                                <a href="{{route('project.detail', $item->id)}}" class="btn btn-sm btn-info btn-fix btn-manage"><span class="btn-icon text-white"><i class="la la-pencil"></i>Manage</span></a>
-                                            @endif
+                                            @endif                  
+                                            <a href="{{route('project.detail', $item->id)}}" class="btn btn-sm btn-info btn-fix btn-manage"><span class="btn-icon text-white"><i class="la la-info-circle"></i>View</span></a>                                            
                                         </td>
                                     </tr>
                                 @endforeach

@@ -20,7 +20,7 @@
             <div class="ibox">
                 <div class="ibox-body">                                           
                     <div class="text-right mb-4">
-                        @if($role == 'accountant')
+                        @if($role == 'admin' || $role == 'accountant')
                             <a href="{{route('request.export')}}" id="btn-export" class="btn btn-info btn-fix"><span class="btn-icon"><i class="la la-file-excel-o"></i>Export</span></a>
                         @endif
                         @if ($role == 'project_manager') 
@@ -33,10 +33,12 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th>Title</th>
+                                    <th>Description</th>
                                     <th>Project</th>
                                     <th>Course</th>
                                     <th>Amount</th>
                                     <th class="text-center">Status</th>
+                                    <th class="text-center">Attachment</th>
                                     @if ($role == 'admin' || $role == 'accountant')
                                         <th class="text-center">Action</th>
                                     @endif
@@ -47,6 +49,7 @@
                                     <tr>
                                         <td class="text-center">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                         <td class="title">{{$item->title}}</td>
+                                        <td class="description">{{$item->description}}</td>
                                         <td class="project" data-value="{{$item->course->project->id}}">@isset($item->course->project->id){{$item->course->project->name}}@endisset</td>
                                         <td class="course" data-value="{{$item->course_id}}">@isset($item->course->name){{$item->course->name}}@endisset</td>
                                         <td class="amount">{{$item->amount}}</td>
@@ -71,9 +74,17 @@
                                                     
                                             @endswitch
                                         </td>
+                                        <td class="attachment text-center">
+                                            @if($item->attachment != null)
+                                                @php
+                                                    $path_info = pathinfo($item->attachment);
+                                                @endphp
+                                                <a href="#" data-type="{{$path_info['extension']}}" data-value="{{asset($item->attachment)}}"><i class="fa fa-paperclip"></i><a>
+                                            @endif
+                                        </td>
                                         @if ($role == 'admin' || $role == 'accountant')
                                             <td class="text-center py-1">
-                                                <a class="btn btn-sm btn-info btn-fix btn-response" data-id="{{$item->id}}"><span class="btn-icon text-white"><i class="la la-comment"></i>Response</span></a>
+                                                <a class="btn btn-sm @if($item->exceed == 1) btn-danger @else btn-info @endif btn-fix btn-response" data-id="{{$item->id}}" data-exceed={{$item->exceed}}><span class="btn-icon text-white"><i class="la la-comment"></i>Response</span></a>
                                             </td>
                                         @endif
                                     </tr>
@@ -99,7 +110,7 @@
     <div class="modal fade" id="addModal">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{{route('request.create')}}" method="post" id="add_form">
+                <form action="{{route('request.create')}}" method="post" id="add_form" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
                         <h4 class="modal-title">Request Money</h4>
@@ -125,8 +136,16 @@
                             </select>
                         </div>                        
                         <div class="form-group">
+                            <label class="control-label text-right mt-1">Description</label>
+                            <input class="form-control" type="text" name="description" id="add_description" placeholder="Description">
+                        </div>                        
+                        <div class="form-group">
                             <label class="control-label text-right mt-1">Amount<span class="text-danger">*</span></label>
                             <input class="form-control" type="number" name="amount" id="add_amount" placeholder="Amount" required>
+                        </div>                        
+                        <div class="form-group">
+                            <label class="control-label text-right mt-1">Attachment</label>
+                            <input class="form-control form-control-sm" type="file" name="attachment" id="add_attachment" accept="image/*, application/pdf">
                         </div>
                     </div>
                     
@@ -177,6 +196,24 @@
         </div>
     </div>
 
+    <div class="modal fade" id="imageModal">
+        <div class="modal-dialog" style="margin-top:17vh">
+            <div class="modal-content">
+                <img src="" id="image_attach" width="500" height="600" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="pdfModal">
+        <div class="modal-dialog modal-lg" style="margin-top:7vh">
+            <div class="modal-content">
+                <iframe src="" id="pdf_attach" frameborder="0" width="100%" style="height:85vh;"></iframe>
+            </div>
+        </div>
+    </div>
+
+
+
 @endsection
 
 @section('script')
@@ -185,7 +222,7 @@
     <script src="{{asset('master/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script> 
     <script>
         $(document).ready(function(){
-
+            var user_role = '{{Auth::user()->role->slug}}';
             $('#add_due_to').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -223,12 +260,29 @@
                 let id = $(this).data('id');
                 let title = $(this).parents('tr').find('.title').text().trim();
                 let amount = $(this).parents('tr').find('.amount').text().trim();
-
+                let exceed = $(this).data('exceed');
+                if((exceed == "1" && user_role != 'admin') || (exceed != "1" && user_role != 'accountant')){
+                    alert("You can' t respond to exceed limit request");
+                    return false;
+                }
                 $("#response_id").val(id);
                 $("#response_title").val(title);
                 $("#response_amount").val(amount);
                 $("#responseModal").modal();
             });
+
+            $("td.attachment a").click(function(e){
+                e.preventDefault();
+                let type = $(this).data('type');
+                let url = $(this).data('value');
+                if (type == 'pdf') {
+                    $("#pdf_attach").attr('src', url);
+                    $("#pdfModal").modal();
+                }else{
+                    $("#image_attach").attr('src', url);
+                    $("#imageModal").modal();
+                }
+            })
         });
     </script>
 @endsection
