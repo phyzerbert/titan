@@ -104,7 +104,7 @@ class ProjectController extends Controller
         $data = $request->all();
         // dump($data);die;
         $course = Course::create($data);
-        if(count($data['members'])){
+        if(isset($data['members']) && count($data['members'])){
             foreach ($data['members'] as $item) {
                 CourseUser::create([
                     'course_id' => $course->id,
