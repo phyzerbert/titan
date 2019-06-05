@@ -81,7 +81,7 @@
                                                 <a class="btn btn-sm btn-info btn-fix btn-edit" data-id="{{$item->id}}"><span class="btn-icon text-white"><i class="la la-pencil"></i>Edit</span></a>
                                                 {{-- <a href="{{route('project.delete', $item->id)}}" class="btn btn-sm btn-danger btn-fix" onclick="return window.confirm('Are you sure?')"><span class="btn-icon text-white"><i class="la la-trash"></i>Remove</span></a> --}}
                                             @endif                  
-                                            <a href="{{route('project.detail', $item->id)}}" class="btn btn-sm btn-info btn-fix btn-manage"><span class="btn-icon text-white"><i class="la la-info-circle"></i>View</span></a>                                            
+                                            <a href="{{route('project.detail', $item->id)}}" class="btn btn-sm btn-secondary btn-fix btn-manage"><span class="btn-icon text-white"><i class="la la-info-circle"></i>View</span></a>                                            
                                             @if ($role == 'project_manager')
                                                 <a href="#" data-id="{{$item->id}}" class="btn btn-sm btn-primary btn-fix btn-report"><span class="btn-icon text-white"><i class="fa fa-thermometer-half"></i>Report</span></a>
                                             @endif
