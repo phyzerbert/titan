@@ -20,7 +20,9 @@
             <div class="ibox">
                 <div class="ibox-body">                   
                     <div class="text-right mb-4">
-                        <a href="{{route('project.export')}}" id="btn-export" class="btn btn-info btn-fix"><span class="btn-icon"><i class="la la-file-excel-o"></i>Export</span></a>
+                        @if ($role == 'admin' || $role == 'accountant')                        
+                            <a href="{{route('project.export')}}" id="btn-export" class="btn btn-info btn-fix"><span class="btn-icon"><i class="la la-file-excel-o"></i>Export</span></a>
+                        @endif
                         @if ($role == 'admin')     
                             <button type="button" id="btn-add" class="btn btn-primary btn-fix"><span class="btn-icon"><i class="ti-plus"></i>Add New</span></button>
                         @endif

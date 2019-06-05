@@ -63,7 +63,9 @@
                                 @if($role == 'project_manager')
                                     <a href="{{route('create_course')}}" id="btn-add-course" class="btn btn-sm btn-primary btn-fix float-right mb-2"><span class="btn-icon"><i class="ti-plus"></i>Add New</span></a>
                                 @endif
-                                <a href="{{route('course.export', $project->id)}}" id="btn-add-course" class="btn btn-sm btn-primary btn-fix float-right mb-2 mr-2"><span class="btn-icon"><i class="la la-file-excel-o"></i>Export</span></a>
+                                @if($role == 'admin' || $role == 'accountant')
+                                    <a href="{{route('course.export', $project->id)}}" id="btn-add-course" class="btn btn-sm btn-primary btn-fix float-right mb-2 mr-2"><span class="btn-icon"><i class="la la-file-excel-o"></i>Export</span></a>
+                                @endif
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover" id="coursesTable">
