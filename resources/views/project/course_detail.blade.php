@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-3 pl-3">
                                     <h6 class="mb-3">Course Status</h6>
-                                    <span class="h2 mr-3"><i class="fa fa-calendar text-primary h1 mb-0 mr-2"></i>
+                                    <span class="h2 mr-3"><i class="fa fa-list text-primary h1 mb-0 mr-2"></i>
                                         <span>{{$course->status}}</span>
                                     </span>
                                 </div>
@@ -83,6 +83,35 @@
         </div>
         <!-- END PAGE CONTENT-->
         @include('layouts.footer')        
+    </div>
+
+    <div class="modal fade" id="addModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{route('add.member')}}" method="post" id="add_form">
+                    @csrf
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Member</h4>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label text-right mt-1">Name<span class="text-danger">*</span></label>
+                            <select class="form-control" id="member_select" name="members[]" multiple="multiple">
+                                @foreach ($members as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>                                                
+                                @endforeach
+                            </select> 
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">    
+                        <button type="submit" class="btn btn-primary">Save</button>                       
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection
 

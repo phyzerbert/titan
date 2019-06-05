@@ -118,13 +118,31 @@ class ProjectController extends Controller
 
     public function detail_course($id){
         $course =  Course::find($id);
-
-        return view('project.course_detail', compact('course'));
+        $members = User::where('role_id', 4)->get();
+        return view('project.course_detail', compact('course', 'members'));
     }
 
     public function delete_course($id){
         $course =  Course::find($id);
         $course->delete();
+        return back()->with('success', 'Deleted Successfully');
+    }
+
+    public function add_member(Request $request){
+        $request->validate([
+            'course_id' => 'required',
+            'members' => 'required',
+        ]);
+        $members = $request->get('members');
+        $course_id = $request->get('course_id');
+        foreach ($members as $item) {
+            $exist_member = CourseUser::where('course_id', $course_id)->where('user_id', $item)->first();
+            if($exist_member) continue;
+            CourseUser::create([
+                'course_id' => $course_id,
+                'user_id' => $item,
+            ]);
+        }
         return back()->with('success', 'Deleted Successfully');
     }
 
