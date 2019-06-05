@@ -1,0 +1,22 @@
+## Installation Instructions
+
+- Run git clone https://github.com/phyzerbert/titan.git
+- Create a MySQL database for the project
+    - mysql -u root -p
+    - create database titan;
+    - \q
+- Copy .env.example to .env
+- Configure your .env file
+    - APP_NAME=SYSTEM
+    - DB_DATABASE=titan
+    - DB_USERNAME=root
+    - DB_PASSWORD=null
+- Run 'composer update' from the projects root folder.
+- From the projects root folder run 'php artisan key:generate'
+- Run 'composer dump-autoload'
+- From the projects root folder run 'php artisan migrate'
+- From the projects root folder run 'php artisan db:seed'
+- Run 'php artisan serve'
+- Start server at http://localhost:8000
+- Admin email: admin@titan.com
+- Admin Password: 123456
