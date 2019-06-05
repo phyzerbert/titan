@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Hash;
+use Auth;
 
 class UserController extends Controller
 {
@@ -14,6 +15,9 @@ class UserController extends Controller
     }
 
     public function index(Request $request){
+        if(Auth::user()->role->slug != 'admin'){
+            return back()->withErrors(['error' => "You can't visit this page."]);
+        }
         config(['site.c_page' => 'users']);
         $data =  User::orderBy('created_at', 'desc')->paginate(10);
 
