@@ -56,6 +56,7 @@
                                     <th>Due to Date</th>
                                     <th>Limit</th>
                                     <th>Progress</th>
+                                    <th>Created at</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -74,6 +75,7 @@
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="{{$item->progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$item->progress}}%;">{{$item->progress}}%</div>
                                             </div>
                                         </td>
+                                        <td class="created_at">{{$item->created_at}}</td>
                                         <td class="text-center py-1">
                                             @if ($role == 'admin')
                                                 <a class="btn btn-sm btn-info btn-fix btn-edit" data-id="{{$item->id}}"><span class="btn-icon text-white"><i class="la la-pencil"></i>Edit</span></a>
