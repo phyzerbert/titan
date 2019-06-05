@@ -52,7 +52,7 @@
             <div class="form-group mb-4">
                 <input class="form-control form-control-line" type="email" name="email" value="{{ old('email') }}" placeholder="{{ __('E-Mail Address') }}" required autocomplete="email" autofocus />
                 @error('email')
-                    <span class="invalid-feedback" role="alert">
+                    <span class="invalid-feedback d-block" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
@@ -60,7 +60,7 @@
             <div class="form-group mb-4">
                 <input class="form-control form-control-line" type="password" name="password" placeholder="{{ __('Password') }}" required autocomplete="current-password" />
                 @error('password')
-                    <span class="invalid-feedback" role="alert">
+                    <span class="invalid-feedback d-block" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
@@ -83,7 +83,7 @@
     </div>
 @endsection
 
-@section('after-js')
+@section('script')
     <script>
         $(function() {
             $('#login-form').validate({
