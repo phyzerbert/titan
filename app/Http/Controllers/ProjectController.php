@@ -109,7 +109,7 @@ class ProjectController extends Controller
             'status' => 'required',
         ]);
         $data = $request->all();
-        if($data['status'] == 3){
+        if($data['status'] == 4){
             $data['progress'] =100;
         }
         // dump($data);die;
