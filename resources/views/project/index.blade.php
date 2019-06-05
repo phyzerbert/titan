@@ -52,7 +52,12 @@
                                         <td class="description">{{$item->description}}</td>
                                         <td class="due_to">{{$item->due_to}}</td>
                                         <td class="limit" data-value="{{$item->limit}}">{{$item->limit}}</td>
-                                        <td class="prog" data-value="{{$item->progress}}">{{$item->progress}}%</td>
+                                        <td class="prog" data-value="{{$item->progress}}">
+                                            {{-- {{$item->progress}}% --}}
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{$item->progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$item->progress}}%;">{{$item->progress}}%</div>
+                                            </div>
+                                        </td>
                                         <td class="text-center py-1">
                                             @if ($role == 'admin')
                                                 <a class="btn btn-sm btn-info btn-fix btn-edit" data-id="{{$item->id}}"><span class="btn-icon text-white"><i class="la la-pencil"></i>Edit</span></a>
