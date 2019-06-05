@@ -97,7 +97,11 @@
                                                     @endif
                                                 </td>
                                                 <td class="project" data-value="{{$item->project_id}}">@isset($item->project->name){{$item->project->name}}@endisset</td>
-                                                <td class="prog" data-value="{{$item->progress}}">{{$item->progress}}%</td>
+                                                <td class="prog" data-value="{{$item->progress}}">
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{$item->progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$item->progress}}%;">{{$item->progress}}%</div>
+                                                    </div>
+                                                </td>
                                                 <td class="due_to">{{$item->due_to}}</td>
                                                 <td class="text-center py-1">
                                                     <a href="{{route('course.delete', $item->id)}}" class="btn btn-sm btn-danger btn-fix" onclick="return window.confirm('Are you sure?')"><span class="btn-icon text-white"><i class="la la-trash"></i>Remove</span></a> 

@@ -53,7 +53,6 @@
                                         <td class="due_to">{{$item->due_to}}</td>
                                         <td class="limit" data-value="{{$item->limit}}">{{$item->limit}}</td>
                                         <td class="prog" data-value="{{$item->progress}}">
-                                            {{-- {{$item->progress}}% --}}
                                             <div class="progress">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="{{$item->progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$item->progress}}%;">{{$item->progress}}%</div>
                                             </div>
