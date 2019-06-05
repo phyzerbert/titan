@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Course;
 use App\Models\CourseUser;
 use App\Models\Company;
+use App\Models\Notification;
 use App\Models\Request as MoneyRequest;
 use App\User;
 use Auth;
@@ -57,6 +58,11 @@ class ProjectController extends Controller
         ]);
         $data = $request->all();
         Project::create($data);
+        $content = 'Project '.$data['name']." is created.";
+        Notification::create([
+            'type' => 'create_project',
+            'content' => $content,
+        ]);
         return back()->with('success', 'Created Successfully');
     }
 
@@ -136,6 +142,12 @@ class ProjectController extends Controller
                 ]);
             }
         }
+        $project = Project::find($data['project_id']);
+        $content = Auth::user()->name.' created new course for '.$project->name.".";
+        Notification::create([
+            'type' => 'new_course',
+            'content' => $content,
+        ]);
 
         return redirect(route('project.detail', $request->get('project_id')))->with('success', 'Created successfully');        
     }
@@ -201,7 +213,7 @@ class ProjectController extends Controller
         ]);
         $project =  Project::find($request->get('project_id'));
         $consumed_money = $project->courses()->sum('amount');
-
+        $course = Course::find($request->get('course_id'));
         
         $item = new MoneyRequest();
         $item->title = $request->get('title');
@@ -211,6 +223,11 @@ class ProjectController extends Controller
         $item->amount = $request->get('amount');
         if($consumed_money + $request->get('amount') > $project->limit){
             $item->exceed = 1;
+            $content = Auth::user()->name.' requested exceed money for '.$course->name.".";
+            Notification::create([
+                'type' => 'exceed_limit',
+                'content' => $content,
+            ]);
         }
         if($request->file('attachment') != null){
             $image = request()->file('attachment');
@@ -219,6 +236,12 @@ class ProjectController extends Controller
             $item->attachment = 'uploaded/request_attachments/'.$imageName;
         }
         $item->save();
+        
+        $content = Auth::user()->name.' requested money for '.$course->name.".";
+        Notification::create([
+            'type' => 'new_request',
+            'content' => $content,
+        ]);
         return back()->with('success', 'Requested Successfully');
     }
 

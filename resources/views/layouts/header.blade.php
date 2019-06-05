@@ -19,44 +19,61 @@
         </ul>
         <!-- END TOP-LEFT TOOLBAR-->
         <!-- START TOP-RIGHT TOOLBAR-->
+        @php
+            $recent_messages = \App\Models\Notification::orderBy('created_at')->limit(10)->get();
+            // dump($recent_messages);
+        @endphp
         <ul class="nav navbar-toolbar">
-            {{-- <li class="dropdown dropdown-notification">
+            <li class="dropdown dropdown-notification">
                 <a class="nav-link dropdown-toggle toolbar-icon" data-toggle="dropdown" href="javascript:;"><i class="ti-bell rel"><span class="notify-signal"></span></i></a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-media">
                     <div class="dropdown-arrow"></div>
-                    <div class="dropdown-header text-center">
+                    {{-- <div class="dropdown-header text-center">
                         <div>
                             <span class="font-18"><strong>14 New</strong> Notifications</span>
                         </div>
                         <a class="text-muted font-13" href="javascript:;">view all</a>
-                    </div>
+                    </div> --}}
                     <div class="p-3">
-                        <ul class="timeline scroller" data-height="320px">
-                            <li class="timeline-item"><i class="ti-check timeline-icon"></i>2 Issue fixed<small class="float-right text-muted ml-2 nowrap">Just now</small></li>
-                            <li class="timeline-item"><i class="ti-announcement timeline-icon"></i>
-                                <span>7 new feedback
-                                    <span class="badge badge-warning badge-pill ml-2">important</span>
-                                </span><small class="float-right text-muted">5 mins</small></li>
-                            <li class="timeline-item"><i class="ti-truck timeline-icon"></i>25 new orders sent<small class="float-right text-muted ml-2 nowrap">24 mins</small></li>
-                            <li class="timeline-item"><i class="ti-shopping-cart timeline-icon"></i>12 New orders<small class="float-right text-muted ml-2 nowrap">45 mins</small></li>
-                            <li class="timeline-item"><i class="ti-user timeline-icon"></i>18 new users registered<small class="float-right text-muted ml-2 nowrap">1 hrs</small></li>
-                            <li class="timeline-item"><i class="ti-harddrives timeline-icon"></i>
-                                <span>Server Error
-                                    <span class="badge badge-success badge-pill ml-2">resolved</span>
-                                </span><small class="float-right text-muted">2 hrs</small></li>
-                            <li class="timeline-item"><i class="ti-info-alt timeline-icon"></i>
-                                <span>System Warning
-                                    <a class="text-purple ml-2">Check</a>
-                                </span><small class="float-right text-muted ml-2 nowrap">12:07</small></li>
-                            <li class="timeline-item"><i class="fa fa-file-excel-o timeline-icon"></i>The invoice is ready<small class="float-right text-muted ml-2 nowrap">12:30</small></li>
-                            <li class="timeline-item"><i class="ti-shopping-cart timeline-icon"></i>5 New Orders<small class="float-right text-muted ml-2 nowrap">13:45</small></li>
-                            <li class="timeline-item"><i class="ti-arrow-circle-up timeline-icon"></i>Production server up<small class="float-right text-muted ml-2 nowrap">1 days ago</small></li>
-                            <li class="timeline-item"><i class="ti-harddrives timeline-icon"></i>Server overloaded 91%<small class="float-right text-muted ml-2 nowrap">2 days ago</small></li>
-                            <li class="timeline-item"><i class="ti-info-alt timeline-icon"></i>Server error<small class="float-right text-muted ml-2 nowrap">2 days ago</small></li>
+                        <ul class="timeline scroller" data-height="250px">
+                            @foreach ($recent_messages as $item)
+                                <li class="timeline-item">
+                                    @switch($item->type)
+                                        @case("create_project")
+                                            <i class="ti-check timeline-icon"></i>
+                                            @break
+                                        @case("new_request")
+                                            <i class="fa fa-file-excel-o timeline-icon"></i>
+                                            @break
+                                        @case("exceed_limit")
+                                            <i class="fa fa-file-excel-o timeline-icon"></i>
+                                            @break
+                                        @case("new_course")
+                                            <i class="fa fa-file-excel-o timeline-icon"></i>
+                                            @break
+                                        @case("completed")
+                                            <i class="ti-announcement timeline-icon"></i>
+                                            @break
+                                        @default
+                                            <i class="fa fa-file-excel-o timeline-icon"></i>
+                                    @endswitch                                    
+                                    {{$item->content}}
+                                </li>
+                            @endforeach
+                            {{-- <li class="timeline-item"><i class="ti-check timeline-icon"></i>2 Issue fixed</li>
+                            <li class="timeline-item"><i class="ti-announcement timeline-icon"></i>7 new feedback</li>
+                            <li class="timeline-item"><i class="ti-truck timeline-icon"></i>25 new orders sent</li>
+                            <li class="timeline-item"><i class="ti-shopping-cart timeline-icon"></i>12 New orders</li>
+                            <li class="timeline-item"><i class="ti-user timeline-icon"></i>18 new users registered</li>
+                            <li class="timeline-item"><i class="fa fa-file-excel-o timeline-icon"></i>The invoice is ready</li>
+                            <li class="timeline-item"><i class="ti-shopping-cart timeline-icon"></i>5 New Orders</li>
+                            <li class="timeline-item"><i class="ti-arrow-circle-up timeline-icon"></i>Production server up</li>
+                            <li class="timeline-item"><i class="ti-harddrives timeline-icon"></i>Server overloaded 91%</li>
+                            <li class="timeline-item"><i class="ti-info-alt timeline-icon"></i>Server error</li> --}}
                         </ul>
                     </div>
                 </div>
-            </li> --}}
+            </li>
             <li class="dropdown dropdown-user">
                 <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                     <span>{{Auth::user()->name}}</span>
