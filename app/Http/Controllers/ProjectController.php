@@ -43,7 +43,7 @@ class ProjectController extends Controller
         ]);
         $data = $request->all();
         Project::create($data);
-        return redirect(route('project.index'))->with('success', 'Created successfully');
+        return back()->with('success', 'Created Successfully');
     }
 
     public function edit(Request $request){
@@ -120,7 +120,7 @@ class ProjectController extends Controller
             }
         }
 
-        return back()->with('success', 'Created Successfully');
+        return redirect(route('project.detail', $request->get('project_id')))->with('success', 'Created successfully');        
     }
 
     public function detail_course($id){
