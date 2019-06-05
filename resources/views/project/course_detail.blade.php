@@ -1,7 +1,10 @@
 @extends('layouts.master')
 @section('style')    
-    <link href="{{asset('master/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet" />    
-    <link href="{{asset('master/vendors/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('master/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet" />  
+    <link href="{{asset('master/vendors/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+    <style>
+        span.select2-container{width: 100% !important;}
+    </style>
 @endsection
 @section('content')
     @php
@@ -90,18 +93,22 @@
             <div class="modal-content">
                 <form action="{{route('add.member')}}" method="post" id="add_form">
                     @csrf
+                    <input type="hidden" name="course_id" value="{{$course->id}}">
                     <div class="modal-header">
                         <h4 class="modal-title">Add New Member</h4>
                         <button type="button" class="close" data-dismiss="modal">×</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Name<span class="text-danger">*</span></label>
-                            <select class="form-control" id="member_select" name="members[]" multiple="multiple">
-                                @foreach ($members as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>                                                
-                                @endforeach
-                            </select> 
+                            <label class="control-label w-100">Name<span class="text-danger">*</span></label>
+                            <div class="w-100">
+                                <select class="form-control" id="member_select" name="members[]" multiple="multiple">
+                                    @foreach ($members as $item)
+                                        @if ($item->hasCourse($course->id)) @continue @endif
+                                        <option value="{{$item->id}}">{{$item->name}}</option>                                                
+                                    @endforeach
+                                </select> 
+                            </div>
                         </div>
                     </div>
                     
@@ -118,8 +125,8 @@
 @section('script')
 
     <script src="{{asset('master/vendors/moment/min/moment.min.js')}}"></script>
-    <script src="{{asset('master/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>    
-    <script src="{{asset('master/vendors/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js')}}"></script>
+    <script src="{{asset('master/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>  
+    <script src="{{asset('master/vendors/select2/dist/js/select2.full.min.js')}}"></script>
     <script>
         $(document).ready(function(){
 
@@ -132,7 +139,9 @@
                 format: "yyyy-mm-dd"
             });
 
-            $("#btn-add").click(function(){
+            $("#member_select").select2();
+
+            $("#btn-add-member").click(function(){
                 $("#addModal").modal();
             });
 
@@ -157,15 +166,6 @@
                 $("#edit_form .limit").val(limit);
                 $("#edit_form .progress").val(progress);
                 $("#editModal").modal();
-            });
-
-            $("#edit_form .progress").TouchSpin({
-                min: 0,
-                max: 100,
-                step: 1,
-                boostat: 5,
-                maxboostedstep: 10,
-                postfix: '%',
             });
         });
     </script>

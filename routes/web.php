@@ -42,6 +42,7 @@ Route::post('/project/save/course', 'ProjectController@save_course')->name('save
 Route::get('/project/course/delete/{id}', 'ProjectController@delete_course')->name('course.delete');
 Route::get('/project/course/detail/{id}', 'ProjectController@detail_course')->name('course.detail');
 Route::post('/project/get_courses', 'ProjectController@get_courses')->name('get_courses');
+Route::post('/project/add_member', 'ProjectController@add_member')->name('add.member');
 
 Route::get('/project/request/index', 'ProjectController@requests')->name('request.index');
 Route::post('/project/create/request', 'ProjectController@create_request')->name('request.create');

@@ -49,6 +49,16 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Course', 'course_users');
     }
 
+    public function hasCourse($course_id){
+        $courses = $this->courses;
+        foreach ($courses as $value) {
+            if($value->id == $course_id){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function requests(){
         return $this->hasMany('App\Models\Request');
     }
