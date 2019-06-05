@@ -50,7 +50,8 @@
             @csrf
             <h4 class="font-strong text-center mb-5">FORGOT PASSWORD</h4>
             @if (session('status'))
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-pink alert-dismissable fade show alert-outline">
+                    <button class="close" data-dismiss="alert" aria-label="Close"></button>
                     {{ session('status') }}
                 </div>
             @endif
