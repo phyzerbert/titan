@@ -35,6 +35,7 @@ Route::get('/project/index', 'ProjectController@index')->name('project.index');
 Route::get('/project/detail/{id}', 'ProjectController@detail')->name('project.detail');
 Route::post('/project/create', 'ProjectController@create')->name('project.create');
 Route::post('/project/edit', 'ProjectController@edit')->name('project.edit');
+Route::post('/project/report', 'ProjectController@report')->name('project.report');
 Route::get('/project/delete/{id}', 'ProjectController@delete')->name('project.delete');
 
 Route::get('/project/create/course', 'ProjectController@create_course')->name('create_course');

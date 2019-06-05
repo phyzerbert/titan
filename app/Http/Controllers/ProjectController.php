@@ -43,7 +43,7 @@ class ProjectController extends Controller
         ]);
         $data = $request->all();
         Project::create($data);
-        return back()->with('success', 'Created successfully');
+        return redirect(route('project.index'))->with('success', 'Created successfully');
     }
 
     public function edit(Request $request){
@@ -63,6 +63,13 @@ class ProjectController extends Controller
 
         $project->update();
         return back()->with("success", "Updated Successfully.");
+    }
+
+    public function report(Request $request){
+        $project = Project::find($request->get('id'));
+        $project->progress = $request->get('progress');
+        $project->save();
+        return back()->with('success', 'Successfully Set.');
     }
 
     public function delete($id){

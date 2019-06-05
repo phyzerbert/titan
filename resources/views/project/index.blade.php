@@ -59,6 +59,9 @@
                                                 <a href="{{route('project.delete', $item->id)}}" class="btn btn-sm btn-danger btn-fix" onclick="return window.confirm('Are you sure?')"><span class="btn-icon text-white"><i class="la la-trash"></i>Remove</span></a>
                                             @endif                  
                                             <a href="{{route('project.detail', $item->id)}}" class="btn btn-sm btn-info btn-fix btn-manage"><span class="btn-icon text-white"><i class="la la-info-circle"></i>View</span></a>                                            
+                                            @if ($role == 'project_manager')
+                                                <a href="#" data-id="{{$item->id}}" class="btn btn-sm btn-primary btn-fix btn-report"><span class="btn-icon text-white"><i class="fa fa-thermometer-half"></i>Report</span></a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -243,6 +246,45 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="progressModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{route('project.report')}}" method="post" id="progress_form">
+                    @csrf
+                    <input type="hidden" class="id" name="id" />
+                    <div class="modal-header">
+                        <h4 class="modal-title">Change Progress</h4>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label text-right mt-1">Name<span class="text-danger">*</span></label>
+                            <input class="form-control name" type="text" name="name" id="progress_name" placeholder="Name" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label text-right mt-1">Due to Date<span class="text-danger">*</span></label>
+                            <div class="input-group date">
+                                <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                                <input class="form-control due_to" type="text" name="due_to" id="progress_due_to" autocomplete="off" readonly />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Progress</label>
+                            <input class="form-control progress" name="progress" type="text">
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">    
+                        <button type="submit" class="btn btn-primary">Save</button>                       
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -289,7 +331,20 @@
                 $("#editModal").modal();
             });
 
-            $("#edit_form .progress").TouchSpin({
+            $(".btn-report").click(function(){
+                let id = $(this).data('id');
+                let name = $(this).parents('tr').find('.name').text().trim();
+                let due_to = $(this).parents('tr').find('.due_to').text().trim();
+                let progress = $(this).parents('tr').find('.prog').data('value');
+
+                $("#progress_form .id").val(id);
+                $("#progress_form .name").val(name);
+                $("#progress_form .due_to").val(due_to);
+                $("#progress_form .progress").val(progress);
+                $("#progressModal").modal();
+            });
+
+            $("form .progress").TouchSpin({
                 min: 0,
                 max: 100,
                 step: 1,
