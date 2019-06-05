@@ -31,7 +31,7 @@ Route::post('/user/create', 'UserController@create')->name('user.create');
 Route::post('/user/edit', 'UserController@edit')->name('user.edit');
 Route::get('/user/delete/{id}', 'UserController@delete')->name('user.delete');
 
-Route::get('/project/index', 'ProjectController@index')->name('project.index');
+Route::any('/project/index', 'ProjectController@index')->name('project.index');
 Route::get('/project/detail/{id}', 'ProjectController@detail')->name('project.detail');
 Route::post('/project/create', 'ProjectController@create')->name('project.create');
 Route::post('/project/edit', 'ProjectController@edit')->name('project.edit');

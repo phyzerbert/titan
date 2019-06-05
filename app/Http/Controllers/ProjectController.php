@@ -24,13 +24,27 @@ class ProjectController extends Controller
         $managers = User::where('role_id', 3)->get();
         $companies = Company::all();
         $user = Auth::user();
+
         if($user->role->slug == 'admin' || $user->role->slug == 'accountant'){
-            $data =  Project::orderBy('created_at', 'desc')->paginate(10);
+            $mod = new Project();
         }else if($user->role->slug == 'project_manager'){
-            $data =  $user->projects()->orderBy('created_at', 'desc')->paginate(10);
+            $mod =  $user->projects();
+        }
+        $period = $company_id = '';
+        if($request->get('company_id') != ''){
+            $company_id = $request->get('company_id');
+            $mod = $mod->where('company_id', $company_id);
+        }
+        if($request->has('period') && $request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+            $mod = $mod->whereBetween('created_at', [$from, $to]);
         }
 
-        return view('project.index', compact('data', 'managers', 'companies'));
+        $data = $mod->where('id', '>', 0)->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('project.index', compact('data', 'managers', 'companies', 'company_id', 'period'));
         
     }
 

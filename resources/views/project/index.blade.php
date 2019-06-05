@@ -2,6 +2,7 @@
 @section('style')    
     <link href="{{asset('master/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet" />    
     <link href="{{asset('master/vendors/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('master/vendors/daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" />
 @endsection
 @section('content')
     @php
@@ -18,6 +19,22 @@
         </div>
         <div class="page-content fade-in-up">
             <div class="ibox">
+                <div class="ibox-header p-3">
+                    <form action="" method="POST" class="form-inline">
+                        @csrf 
+                        <label class="control-label mr-sm-2 mb-2" for="period">Company: </label>
+                        <select class="form-control form-control-sm mr-sm-3 mb-2" name="country_id" id="search_company">
+                            <option value="">Select a company</option>
+                            @foreach ($companies as $item)
+                                <option value="{{$item->id}}" @if ($company_id == $item->id) selected @endif>{{$item->name}}</option>
+                            @endforeach
+                        </select>
+                        <label class="control-label mr-sm-3 mb-2" for="name">Created at: </label>
+                        <input type="text" name="period" id="search_date" class="form-control form-control-sm mr-sm-2 mb-2" value="{{ $period }}" autocomplete="off" />
+                        <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;Search</button>
+                        <button type="button" class="btn btn-sm btn-danger ml-2 mb-2" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;Reset</button>
+                    </form>
+                </div>
                 <div class="ibox-body">                   
                     <div class="text-right mb-4">
                         @if ($role == 'admin' || $role == 'accountant')                        
@@ -76,7 +93,7 @@
                                 <p>Total <strong style="color: red">{{ $data->total() }}</strong> Projects</p>
                             </div>
                             <div class="float-right" style="margin: 0;">
-                                {!! $data->appends([])->links() !!}
+                                {!! $data->appends(['period' => $period, 'company_id' => $company_id])->links() !!}
                             </div>
                         </div> 
                     </div>
@@ -296,9 +313,10 @@
     <script src="{{asset('master/vendors/moment/min/moment.min.js')}}"></script>
     <script src="{{asset('master/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>    
     <script src="{{asset('master/vendors/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js')}}"></script>
+    <script src="{{asset('master/vendors/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
     <script>
         $(document).ready(function(){
-
+            $("#search_date").dateRangePicker();
             $('#add_due_to').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -347,6 +365,11 @@
                 $("#progress_form .progress").val(progress);
                 $("#progressModal").modal();
             });
+
+            $("#btn-reset").click(function(){
+                $("#search_company").val('');
+                $("#search_date").val('');
+            })
 
             $("form .progress").TouchSpin({
                 min: 0,
