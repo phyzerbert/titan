@@ -109,6 +109,9 @@ class ProjectController extends Controller
             'status' => 'required',
         ]);
         $data = $request->all();
+        if($data['status'] == 3){
+            $data['progress'] =100;
+        }
         // dump($data);die;
         $course = Course::create($data);
         if(isset($data['members']) && count($data['members'])){

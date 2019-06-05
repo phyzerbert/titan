@@ -32,9 +32,9 @@
                             <thead class="thead-default thead-lg">
                                 <tr>
                                     <th class="text-center">No</th>
+                                    <th>Company</th>
                                     <th>Name</th>
                                     <th>Manager</th>
-                                    <th>Company</th>
                                     <th>Description</th>
                                     <th>Due to Date</th>
                                     <th>Limit</th>
@@ -46,9 +46,9 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <td class="text-center">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
+                                        <td class="company" data-value="{{$item->company_id}}">@isset($item->company->name){{$item->company->name}}@endisset</td>
                                         <td class="name">{{$item->name}}</td>
                                         <td class="manager" data-value="{{$item->user_id}}">@isset($item->user->name){{$item->user->name}}@endisset</td>
-                                        <td class="company" data-value="{{$item->company_id}}">@isset($item->company->name){{$item->company->name}}@endisset</td>
                                         <td class="description">{{$item->description}}</td>
                                         <td class="due_to">{{$item->due_to}}</td>
                                         <td class="limit" data-value="{{$item->limit}}">{{$item->limit}}</td>
