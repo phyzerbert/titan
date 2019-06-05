@@ -158,6 +158,27 @@ class ProjectController extends Controller
         return view('project.course_detail', compact('course', 'members'));
     }
 
+    public function edit_course(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'due_to' => 'required',
+            'progress' => 'required',
+        ]);
+        $data = $request->all();
+        $course = Course::find($data['id']);
+        if ($data['progress'] == 100) {
+            $content = 'Course '.$course->name.' is completed at '.date('Y-m-d H:i');
+            Notification::create([
+                'type' => 'completed',
+                'content' => $content,
+            ]);
+            $data['status'] = 4;
+        }
+        $course->update($data);
+        
+        return back()->with('success', 'Updated Successfully');
+    }
+
     public function delete_course($id){
         $course =  Course::find($id);
         $course->delete();

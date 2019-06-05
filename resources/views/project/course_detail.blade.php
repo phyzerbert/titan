@@ -62,7 +62,9 @@
                     <div class="ibox">
                         <div class="ibox-head">
                             <div class="ibox-title">COURSE TEAM</div>
-                            <a href="#" id="btn-add-member" class="btn btn-sm btn-primary btn-fix float-right mb-2"><span class="btn-icon"><i class="ti-plus"></i>Add Member</span></a>
+                            @if ($role == 'project_manager')                                
+                                <a href="#" id="btn-add-member" class="btn btn-sm btn-primary btn-fix float-right mb-2"><span class="btn-icon"><i class="ti-plus"></i>Add Member</span></a>
+                            @endif
                         </div>
                         <div class="ibox-body">
                             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto;"><ul class="media-list media-list-divider mr-2 scroller">
@@ -79,6 +81,65 @@
                                     </li>
                                 @endforeach
                             </ul><div class="slimScrollBar" style="background: rgb(113, 128, 143); width: 4px; position: absolute; top: 28px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 552.381px;"></div><div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.9; z-index: 90; right: 1px;"></div></div>
+                        </div>
+                    </div>
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">REQUESTS FOR THIS COURSE</div>
+                            {{-- @if ($role == 'project_manager')                                
+                                <a href="#" id="btn-add-member" class="btn btn-sm btn-primary btn-fix float-right mb-2"><span class="btn-icon"><i class="ti-plus"></i>Add Member</span></a>
+                            @endif --}}
+                        </div>
+                        <div class="ibox-body">
+                            <table class="table table-bordered table-hover" id="requestsTable">
+                                <thead class="thead-default thead-lg">
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Project</th>
+                                        <th>Course</th>
+                                        <th>Amount</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Attachment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($course->requests as $item)
+                                        <tr>
+                                            <td class="text-center">{{$loop->iteration }}</td>
+                                            <td class="title">{{$item->title}}</td>
+                                            <td class="description">{{$item->description}}</td>
+                                            <td class="project" data-value="{{$item->course->project->id}}">@isset($item->course->project->id){{$item->course->project->name}}@endisset</td>
+                                            <td class="course" data-value="{{$item->course_id}}">@isset($item->course->name){{$item->course->name}}@endisset</td>
+                                            <td class="amount">{{$item->amount}}</td>
+                                            <td class="text-center py-1">
+                                                @switch($item->status)
+                                                    @case(0)
+                                                        <span class="badge badge-primary badge-pill">Pending</span>
+                                                        @break
+                                                    @case(1)
+                                                        <span class="badge badge-danger badge-pill">Rejected</span>
+                                                        @break
+                                                    @case(2)
+                                                        <span class="badge badge-success badge-pill">Approved</span>
+                                                        @break
+                                                    @default
+                                                        
+                                                @endswitch
+                                            </td>
+                                            <td class="attachment text-center">
+                                                @if($item->attachment != null)
+                                                    @php
+                                                        $path_info = pathinfo($item->attachment);
+                                                    @endphp
+                                                    <a href="#" data-type="{{$path_info['extension']}}" data-value="{{asset($item->attachment)}}"><i class="fa fa-paperclip"></i><a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -117,6 +178,21 @@
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="imageModal">
+        <div class="modal-dialog" style="margin-top:17vh">
+            <div class="modal-content">
+                <img src="" id="image_attach" width="500" height="600" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="pdfModal">
+        <div class="modal-dialog modal-lg" style="margin-top:7vh">
+            <div class="modal-content">
+                <iframe src="" id="pdf_attach" frameborder="0" width="100%" style="height:85vh;"></iframe>
             </div>
         </div>
     </div>
@@ -166,6 +242,19 @@
                 $("#edit_form .limit").val(limit);
                 $("#edit_form .progress").val(progress);
                 $("#editModal").modal();
+            });
+
+            $("td.attachment a").click(function(e){
+                e.preventDefault();
+                let type = $(this).data('type');
+                let url = $(this).data('value');
+                if (type == 'pdf') {
+                    $("#pdf_attach").attr('src', url);
+                    $("#pdfModal").modal();
+                }else{
+                    $("#image_attach").attr('src', url);
+                    $("#imageModal").modal();
+                }
             });
         });
     </script>

@@ -283,7 +283,7 @@
                     $("#image_attach").attr('src', url);
                     $("#imageModal").modal();
                 }
-            })
+            });
         });
     </script>
 @endsection

@@ -17,4 +17,8 @@ class Course extends Model
     public function members(){
         return $this->belongsToMany('App\User', 'course_users');
     }
+
+    public function requests(){
+        return $this->hasMany('App\Models\Request');
+    }
 }

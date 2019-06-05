@@ -42,6 +42,7 @@ Route::get('/project/create/course', 'ProjectController@create_course')->name('c
 Route::post('/project/save/course', 'ProjectController@save_course')->name('save_course');
 Route::get('/project/course/delete/{id}', 'ProjectController@delete_course')->name('course.delete');
 Route::get('/project/course/detail/{id}', 'ProjectController@detail_course')->name('course.detail');
+Route::post('/project/course/edit', 'ProjectController@edit_course')->name('course.edit');
 Route::post('/project/get_courses', 'ProjectController@get_courses')->name('get_courses');
 Route::post('/project/add_member', 'ProjectController@add_member')->name('add.member');
 Route::get('/project/export', 'ExcelController@export_project')->name('project.export');
