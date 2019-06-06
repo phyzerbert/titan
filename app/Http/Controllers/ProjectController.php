@@ -233,7 +233,7 @@ class ProjectController extends Controller
             'amount' => 'required|numeric|min:0',
         ]);
         $project =  Project::find($request->get('project_id'));
-        $consumed_money = $project->courses()->sum('amount');
+        $consumed_money = $project->courses->sum('amount');
         $course = Course::find($request->get('course_id'));
         
         $item = new MoneyRequest();

@@ -101,7 +101,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="ibox">
+                    <div class="ibox ibox-fullheight">
                         <div class="ibox-head">
                             <div class="ibox-title">Recent Courses</div>
                         </div>

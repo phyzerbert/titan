@@ -134,7 +134,7 @@
                                 <tbody>
                                     @foreach ($recent_courses as $item)                                            
                                         <tr>
-                                            <td class="name">{{$item->name}}</td>
+                                            <td class="name"><a href="{{route('course.detail', $item->id)}}">{{$item->name}}</a></td>
                                             <td class="status" data-value="{{$item->status}}">
                                                 @if ($item->status == 1)
                                                     <span class="badge badge-primary badge-pill">New</span>

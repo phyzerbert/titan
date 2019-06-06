@@ -23,7 +23,7 @@
                     <form action="" method="POST" class="form-inline">
                         @csrf 
                         <label class="control-label mr-sm-2 mb-2" for="period">Company: </label>
-                        <select class="form-control form-control-sm mr-sm-3 mb-2" name="country_id" id="search_company">
+                        <select class="form-control form-control-sm mr-sm-3 mb-2" name="company_id" id="search_company">
                             <option value="">Select a company</option>
                             @foreach ($companies as $item)
                                 <option value="{{$item->id}}" @if ($company_id == $item->id) selected @endif>{{$item->name}}</option>
