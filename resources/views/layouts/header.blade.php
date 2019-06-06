@@ -3,7 +3,7 @@
     <div class="page-brand">
         <a href="/" class="mx-auto">
             <span class="brand">{{config('app.name')}}</span>
-            <span class="brand-mini">{{Auth::user()->role->name}}</span>
+            <span class="brand-mini"></span>
         </a>
     </div>
     <div class="flexbox flex-1">
@@ -75,16 +75,6 @@
                                     </li>
                                 </a>
                             @endforeach
-                            {{-- <li class="timeline-item"><i class="ti-check timeline-icon"></i>2 Issue fixed</li>
-                            <li class="timeline-item"><i class="ti-announcement timeline-icon"></i>7 new feedback</li>
-                            <li class="timeline-item"><i class="ti-truck timeline-icon"></i>25 new orders sent</li>
-                            <li class="timeline-item"><i class="ti-shopping-cart timeline-icon"></i>12 New orders</li>
-                            <li class="timeline-item"><i class="ti-user timeline-icon"></i>18 new users registered</li>
-                            <li class="timeline-item"><i class="fa fa-file-excel-o timeline-icon"></i>The invoice is ready</li>
-                            <li class="timeline-item"><i class="ti-shopping-cart timeline-icon"></i>5 New Orders</li>
-                            <li class="timeline-item"><i class="ti-arrow-circle-up timeline-icon"></i>Production server up</li>
-                            <li class="timeline-item"><i class="ti-harddrives timeline-icon"></i>Server overloaded 91%</li>
-                            <li class="timeline-item"><i class="ti-info-alt timeline-icon"></i>Server error</li> --}}
                         </ul>
                     </div>
                 </div>
