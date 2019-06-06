@@ -5013,7 +5013,7 @@ body.fixed-layout.sidebar-mini .content-wrapper {
 .content-wrapper {
     position: relative;
     background-color: #f2f3fa;
-    margin-left: 230px;
+    margin-right: 230px;
     padding: 0 15px 60px 15px;
     -webkit-transition: margin .2s ease-in-out;
     -o-transition: margin .2s ease-in-out;
