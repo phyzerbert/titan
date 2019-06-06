@@ -32,6 +32,7 @@
                             <thead class="thead-default thead-lg">
                                 <tr>
                                     <th class="text-center">No</th>
+                                    <th>Company</th>
                                     <th>Project</th>
                                     <th>Title</th>
                                     <th>Description</th>
@@ -49,6 +50,7 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <td class="text-center">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
+                                        <td class="company" data-value="{{$item->course->project->id}}">@isset($item->course->project->id){{$item->course->project->company->name}}@endisset</td>
                                         <td class="project" data-value="{{$item->course->project->id}}">@isset($item->course->project->id){{$item->course->project->name}}@endisset</td>
                                         <td class="title">{{$item->title}}</td>
                                         <td class="description">{{$item->description}}</td>
