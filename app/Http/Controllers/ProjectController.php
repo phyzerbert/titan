@@ -220,7 +220,7 @@ class ProjectController extends Controller
             $course_array = $user->courses->pluck('id')->toArray();
             $project_array = $user->courses->pluck('project_id')->toArray();
             $projects = Project::whereIn('id', $project_array)->get();
-            $data = MoneyRequest::whereIn('course_id', $course_array)->orderBy('created_at')->paginate(10);
+            $data = MoneyRequest::whereIn('course_id', $course_array)->orderBy('created_at', 'desc')->paginate(10);
         }
 
         return view('project.request', compact('data', 'projects'));
