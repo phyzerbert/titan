@@ -13,11 +13,11 @@
                             <div class="easypie mr-4" data-percent="@if($return['total_users'] > 0){{$return['total_managers']*100/$return['total_users']}}@endif" data-bar-color="#18C5A9" data-size="80" data-line-width="8">
                                 <span class="easypie-data text-success" style="font-size:32px;"><i class="la la-users"></i></span>
                             </div>
-                            <div>
+                            <div class="mr-5">
                                 <h3 class="font-strong text-success">{{$return['total_users']}}</h3>
                                 <div class="text-muted">TOTAL USERS</div>
                             </div>
-                            <div class="ml-5">
+                            <div>
                                 <h3 class="font-strong text-success">{{$return['total_managers']}}</h3>
                                 <div class="text-muted">PROJECT MANAGERS</div>
                             </div>
@@ -30,11 +30,11 @@
                             <div class="easypie mr-4" data-percent="@if($return['total_projects'] > 0){{$return['completed_projects']*100/$return['total_projects']}}@endif" data-bar-color="#5c6bc0" data-size="80" data-line-width="8">
                                 <span class="easypie-data font-26 text-primary"><i class="ti-book"></i></span>
                             </div>
-                            <div>
+                            <div class="mr-5">
                                 <h3 class="font-strong text-primary">{{$return['total_projects']}}</h3>
                                 <div class="text-muted">TOTAL PROJECTS</div>
                             </div>                            
-                            <div class="ml-5">
+                            <div>
                                 <h3 class="font-strong text-primary">{{$return['completed_projects']}}</h3>
                                 <div class="text-muted">COMPLETED PROJECTS</div>
                             </div>
@@ -47,11 +47,11 @@
                             <div class="easypie mr-4" data-percent="@if($return['total_requests'] > 0){{$return['approved_requests']*100/$return['total_requests']}}@endif" data-bar-color="#ff4081" data-size="80" data-line-width="8">
                                 <span class="easypie-data text-pink" style="font-size:32px;"><i class="ti-money"></i></span>
                             </div>
-                            <div>
+                            <div class="mr-5">
                                 <h3 class="font-strong text-pink">{{$return['total_requests']}}</h3>
                                 <div class="text-muted">TOTAL REQUESTS</div>
                             </div>
-                            <div class="ml-5">
+                            <div>
                                 <h3 class="font-strong text-pink">{{$return['approved_requests']}}</h3>
                                 <div class="text-muted">APPRPVED REQUESTS</div>
                             </div>
