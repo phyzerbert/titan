@@ -17,6 +17,7 @@ class CreateNotificationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('type');
             $table->string('content');
+            $table->string('link')->nullable();
             $table->timestamps();
         });
     }

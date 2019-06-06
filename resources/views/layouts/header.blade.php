@@ -48,7 +48,7 @@
                                             href="{{route('request.index')}}"
                                             @break
                                         @case("new_course")
-                                            href="{{route('project.index')}}"
+                                            href="{{route('course.detail', $item->link)}}"
                                             @break
                                         @case("completed")
                                             href="{{route('project.index')}}"

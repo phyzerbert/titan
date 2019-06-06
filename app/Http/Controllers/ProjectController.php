@@ -146,6 +146,7 @@ class ProjectController extends Controller
         Notification::create([
             'type' => 'new_course',
             'content' => $content,
+            'link' => $course->id,
         ]);
 
         return redirect(route('project.detail', $request->get('project_id')))->with('success', 'Created successfully');        
