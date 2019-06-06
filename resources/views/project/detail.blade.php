@@ -6,6 +6,8 @@
 @section('content')
     @php
         $role = Auth::user()->role->slug;
+        $progress = $project->courses->avg('progress');
+        $progress = intval($progress);
     @endphp
     <div class="content-wrapper">
         <!-- START PAGE CONTENT-->
@@ -50,7 +52,7 @@
                                 <div class="col-3 pl-4">
                                     <h6 class="mb-3">Project Progress</h6>
                                     <span class="h2 mr-3"><i class="fa fa-spinner text-primary h1 mb-0 mr-2"></i>
-                                        <span>{{$project->progress}}%</span>
+                                        <span>{{$progress}}%</span>
                                     </span>
                                 </div>
                             </div>
