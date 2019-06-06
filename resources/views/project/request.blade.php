@@ -170,11 +170,15 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" id="response_id">
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Title<span class="text-danger">*</span></label>
-                            <input class="form-control" type="text" name="title" id="response_title" placeholder="Reqeust Title" readonly required>
-                        </div>                       
+                            <label class="control-label text-right mt-1">Project Name</label>
+                            <input class="form-control" type="text" name="project" id="response_project" readonly required>
+                        </div>
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Amount<span class="text-danger">*</span></label>
+                            <label class="control-label text-right mt-1">Title</label>
+                            <input class="form-control" type="text" name="title" id="response_title" placeholder="Reqeust Title" readonly required>
+                        </div>                        
+                        <div class="form-group">
+                            <label class="control-label text-right mt-1">Amount</label>
                             <input class="form-control" type="number" name="amount" id="response_amount" placeholder="Amount" readonly required>
                         </div>
                         <div class="form-group">
@@ -259,14 +263,16 @@
             $(".btn-response").click(function(){
                 let id = $(this).data('id');
                 let title = $(this).parents('tr').find('.title').text().trim();
+                let project = $(this).parents('tr').find('.project').text().trim();
                 let amount = $(this).parents('tr').find('.amount').text().trim();
                 let exceed = $(this).data('exceed');
-                // if((exceed == "1" && user_role != 'admin') || (exceed != "1" && user_role != 'accountant')){
-                if(exceed != "1" && user_role != 'accountant'){
+                if((exceed == "1" && user_role != 'admin') || (exceed != "1" && user_role != 'accountant')){
+                // if(exceed != "1" && user_role != 'accountant'){
                     alert("You can' t respond to exceed limit request");
                     return false;
                 }
                 $("#response_id").val(id);
+                $("#response_project").val(project);
                 $("#response_title").val(title);
                 $("#response_amount").val(amount);
                 $("#responseModal").modal();
