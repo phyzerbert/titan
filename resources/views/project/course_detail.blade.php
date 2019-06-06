@@ -100,8 +100,8 @@
                                         <th>Project</th>
                                         <th>Course</th>
                                         <th>Amount</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center">Attachment</th>
+                                        <th>Status</th>
+                                        <th>Attachment</th>
                                     </tr>
                                 </thead>
                                 <tbody>
