@@ -4878,7 +4878,7 @@ a.text-light:hover {
 }
 
 body:not(.fixed-layout).sidebar-mini .content-wrapper {
-    margin-left: 70px
+    margin-right: 70px
 }
 
 body:not(.fixed-layout).sidebar-mini .page-sidebar {

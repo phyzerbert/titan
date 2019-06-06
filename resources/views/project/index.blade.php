@@ -23,15 +23,15 @@
                     <div class="col-md-8">
                         <form action="" method="POST" class="form-inline">
                             @csrf 
-                            <select class="form-control form-control-sm mr-sm-3 mb-2" name="company_id" id="search_company">
+                            <select class="form-control form-control-sm ml-sm-3 mb-2" name="company_id" id="search_company">
                                 <option value="">Select a company</option>
                                 @foreach ($companies as $item)
                                     <option value="{{$item->id}}" @if ($company_id == $item->id) selected @endif>{{$item->name}}</option>
                                 @endforeach
                             </select>
-                            <input type="text" name="period" id="search_date" class="form-control form-control-sm mr-sm-2 mb-2" value="{{ $period }}" placeholder="Created date" autocomplete="off" />
+                            <input type="text" name="period" id="search_date" class="form-control form-control-sm ml-sm-2 mb-2" value="{{ $period }}" placeholder="Created date" autocomplete="off" />
                             <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;Search</button>
-                            <button type="button" class="btn btn-sm btn-danger ml-2 mb-2" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;Reset</button>
+                            <button type="button" class="btn btn-sm btn-danger mr-2 mb-2" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;Reset</button>
                         </form>
                     </div>
                     <div class="col-md-4 text-right">
@@ -181,7 +181,7 @@
                     </div>
                     
                     <div class="modal-footer">    
-                        <button type="submit" class="btn btn-primary">Save</button>                       
+                        <button type="submit" class="btn btn-primary ml-2">Save</button>                       
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -266,7 +266,7 @@
                     </div>
                     
                     <div class="modal-footer">    
-                        <button type="submit" class="btn btn-primary">Save</button>                       
+                        <button type="submit" class="btn btn-primary ml-2">Save</button>                       
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -305,7 +305,7 @@
                     </div>
                     
                     <div class="modal-footer">    
-                        <button type="submit" class="btn btn-primary">Save</button>                       
+                        <button type="submit" class="btn btn-primary ml-2">Save</button>                       
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </form>
