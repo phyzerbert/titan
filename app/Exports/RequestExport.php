@@ -3,6 +3,8 @@
 namespace App\Exports;
 
 use App\Models\Request;
+use App\Models\Company;
+use App\Models\Project;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -26,6 +28,7 @@ class RequestExport implements FromArray, WithHeadings
                 ->get()->toArray();
         
         foreach ($data as $key => $value) {
+            // $project = Project::find($value->project_id);
             $value->status = $status[$value->status];
         }
         // dump($data); die;
