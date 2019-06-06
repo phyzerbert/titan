@@ -280,7 +280,8 @@
                 let amount = $(this).parents('tr').find('.amount').text().trim();
                 let note = $(this).parents('tr').find('.note').text().trim();
                 let exceed = $(this).data('exceed');
-                if((exceed == "1" && user_role != 'admin') || (exceed != "1" && user_role != 'accountant')){
+                // if((exceed == "1" && user_role != 'admin') || (exceed != "1" && user_role != 'accountant')){
+                if((exceed == "1" && user_role != 'admin')){
                 // if(exceed != "1" && user_role != 'accountant'){
                     alert("You can' t respond to exceed limit request");
                     return false;
