@@ -50,7 +50,7 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <td class="text-center">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
-                                        <td class="company" data-value="{{$item->course->project->id}}">@isset($item->course->project->id){{$item->course->project->company->name}}@endisset</td>
+                                        <td class="company">@isset($item->course->project->id){{$item->course->project->company->name}}@endisset</td>
                                         <td class="project" data-value="{{$item->course->project->id}}">@isset($item->course->project->id){{$item->course->project->name}}@endisset</td>
                                         <td class="title">{{$item->title}}</td>
                                         <td class="description">{{$item->description}}</td>
@@ -174,9 +174,13 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" id="response_id">
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Project Name</label>
-                            <input class="form-control" type="text" name="project" id="response_project" readonly required>
+                            <label class="control-label text-right mt-1">Company</label>
+                            <input class="form-control" type="text" name="company" id="response_company" readonly />
                         </div>
+                        <div class="form-group">
+                                <label class="control-label text-right mt-1">Project Name</label>
+                                <input class="form-control" type="text" name="project" id="response_project" readonly />
+                            </div>
                         <div class="form-group">
                             <label class="control-label text-right mt-1">Title</label>
                             <input class="form-control" type="text" name="title" id="response_title" placeholder="Reqeust Title" readonly required>
@@ -271,6 +275,7 @@
             $(".btn-response").click(function(){
                 let id = $(this).data('id');
                 let title = $(this).parents('tr').find('.title').text().trim();
+                let company = $(this).parents('tr').find('.company').text().trim();
                 let project = $(this).parents('tr').find('.project').text().trim();
                 let amount = $(this).parents('tr').find('.amount').text().trim();
                 let note = $(this).parents('tr').find('.note').text().trim();
@@ -281,6 +286,7 @@
                     return false;
                 }
                 $("#response_id").val(id);
+                $("#response_company").val(company);
                 $("#response_project").val(project);
                 $("#response_title").val(title);
                 $("#response_amount").val(amount);
