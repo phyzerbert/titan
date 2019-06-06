@@ -21,4 +21,8 @@ class Project extends Model
     public function courses(){
         return $this->hasMany('App\Models\Course');
     }
+
+    public function requests(){
+        return $this->hasMany('App\Models\Request');
+    }
 }

@@ -234,17 +234,19 @@ class ProjectController extends Controller
             'amount' => 'required|numeric|min:0',
         ]);
         $project =  Project::find($request->get('project_id'));
-        $consumed_money = $project->courses->sum('amount');
+        $consumed_money = $project->requests->sum('amount');
         $course = Course::find($request->get('course_id'));
         
         $item = new MoneyRequest();
         $item->title = $request->get('title');
         $item->user_id = Auth::user()->id;
+        $item->project_id = $request->get('project_id');
         $item->course_id = $request->get('course_id');
         $item->description = $request->get('description');
         $item->amount = $request->get('amount');
         $item->note = $request->get('note');
-        if($consumed_money + $request->get('amount') > $project->limit){
+        // dump($consumed_money + $request->get('amount')); die;
+        if(($consumed_money + intval($request->get('amount'))) > intval($project->limit)){
             $item->exceed = 1;
             $content = Auth::user()->name.' requested exceed money for '.$course->name.".";
             Notification::create([
