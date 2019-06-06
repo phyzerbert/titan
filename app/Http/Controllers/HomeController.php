@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 use App\User;
 use App\Models\Project;
+use App\Models\Course;
+use App\Models\Notification;
 use App\Models\Request as MoneyRequest;
 
 use Auth;
 use Hash;
+use DB;
 
 class HomeController extends Controller
 {
@@ -62,7 +67,40 @@ class HomeController extends Controller
         $return['total_requested_money'] = MoneyRequest::all()->sum('amount');
         $return['total_approved_money'] = MoneyRequest::where('status', 2)->sum('amount');
 
-        return view('admin.home', compact('return'));
+        $return['week_money'] = $this->getWeekData('sum(amount)');
+        $return['month_money'] = $this->getMonthData('sum(amount)');
+        $return['year_money'] = $this->getYearData('sum(amount)');
+        $return['today_money'] = $this->getTodayData('sum(amount)');
+
+                
+        // ******** Start Chart *********
+        $mod = new MoneyRequest();
+        $period = $daily_money = '';
+        if($request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+        }
+        if(isset($from) && isset($to)){
+            $chart_start = Carbon::createFromFormat('Y-m-d', $from);
+            $chart_end = Carbon::createFromFormat('Y-m-d', $to);
+        }else{
+            $chart_start = Carbon::now()->startOfMonth();
+            $chart_end = Carbon::now()->endOfMonth();
+        }
+        
+        $key_array = $money_array = array();
+        for ($dt=$chart_start; $dt < $chart_end; $dt->addDay()) {
+            $key = $dt->format('Y-m-d');
+            $key1 = $dt->format('M/d');
+            array_push($key_array, $key1);
+            $daily_money = $mod->whereDate('created_at', $key)->sum('amount');
+            array_push($money_array, $daily_money);
+        }
+        // ********** End Chart ***********
+        $recent_courses = Course::orderBy('created_at', 'desc')->limit(5)->get();
+        $recent_notifications = Notification::orderBy('created_at', 'desc')->limit(5)->get();
+        return view('admin.home', compact('return', 'key_array', 'money_array', 'period', 'recent_courses', 'recent_notifications'));
     }
 
     public function accountant_home(Request $request){
@@ -127,6 +165,36 @@ class HomeController extends Controller
         }
         $user->update();
         return back()->with("success", "Updated User Successfully.");
+    }
+
+    // **************************************************************************88
+
+    public function getTodayData($select, $where = ''){
+        $sql = "select ".$select." as sum_count from requests where status = 2 and TO_DAYS(created_at) = TO_DAYS(now()) ".$where;
+        $result = DB::select($sql);
+        $return = ($result[0]->sum_count)?$result[0]->sum_count:"0";        
+        return $return;
+    }
+
+    public function getWeekData($select, $where = ''){ 
+        $sql = "select ".$select." as sum_count from requests where status = 2 and YEARWEEK(DATE_FORMAT(created_at,'%Y-%m-%d')) = YEARWEEK(now()) ".$where;
+        $result = DB::select($sql);
+        $return = ($result[0]->sum_count)?$result[0]->sum_count:"0";
+        return $return;
+    }
+
+    public function getMonthData($select, $where = ''){
+        $sql = "select ".$select." as sum_count from requests where status = 2 and DATE_FORMAT(created_at,'%Y%m') = DATE_FORMAT( CURDATE( ) ,'%Y%m' ) ".$where;
+        $result = DB::select($sql);
+        $return = ($result[0]->sum_count)?$result[0]->sum_count:"0";
+        return $return;
+    }
+
+    public function getYearData($select, $where = ''){
+        $sql = "select ".$select." as sum_count from requests where status = 2 and DATE_FORMAT(created_at,'%Y') = DATE_FORMAT( CURDATE( ) ,'%Y' ) ".$where;
+        $result = DB::select($sql);
+        $return = ($result[0]->sum_count)?$result[0]->sum_count:"0";
+        return $return;
     }
 
 }

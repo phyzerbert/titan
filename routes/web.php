@@ -18,10 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin/home', 'HomeController@admin_home')->name('admin.home');
-Route::get('/accountant/home', 'HomeController@accountant_home')->name('accountant.home');
-Route::get('/manager/home', 'HomeController@manager_home')->name('project_manager.home');
-Route::get('/member/home', 'HomeController@member_home')->name('course_member.home');
+Route::any('/admin/home', 'HomeController@admin_home')->name('admin.home');
+Route::any('/accountant/home', 'HomeController@accountant_home')->name('accountant.home');
+Route::any('/manager/home', 'HomeController@manager_home')->name('project_manager.home');
+Route::any('/member/home', 'HomeController@member_home')->name('course_member.home');
 
 Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::post('/save_profile', 'HomeController@save_profile')->name('save_profile');
