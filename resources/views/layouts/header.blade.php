@@ -20,8 +20,7 @@
         <!-- END TOP-LEFT TOOLBAR-->
         <!-- START TOP-RIGHT TOOLBAR-->
         @php
-            $recent_messages = \App\Models\Notification::orderBy('created_at')->limit(10)->get();
-            // dump($recent_messages);
+            $recent_messages = \App\Models\Notification::orderBy('created_at', 'desc')->limit(10)->get();
         @endphp
         <ul class="nav navbar-toolbar">
             <li class="dropdown dropdown-notification">

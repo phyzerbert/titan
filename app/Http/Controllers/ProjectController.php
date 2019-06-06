@@ -241,6 +241,7 @@ class ProjectController extends Controller
         $item->course_id = $request->get('course_id');
         $item->description = $request->get('description');
         $item->amount = $request->get('amount');
+        $item->note = $request->get('note');
         if($consumed_money + $request->get('amount') > $project->limit){
             $item->exceed = 1;
             $content = Auth::user()->name.' requested exceed money for '.$course->name.".";

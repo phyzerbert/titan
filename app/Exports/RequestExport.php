@@ -22,7 +22,7 @@ class RequestExport implements FromArray, WithHeadings
                 ->join('courses', 'requests.course_id', '=', 'courses.id')
                 ->join('users', 'requests.user_id', '=', 'users.id')
                 ->join('projects', 'courses.project_id', '=', 'projects.id')
-                ->select('requests.title', 'requests.description', 'users.name as username', 'projects.name as proejectname', 'courses.name as coursename', 'requests.amount', 'requests.created_at', 'requests.status')
+                ->select('requests.title', 'requests.description', 'users.name as username', 'projects.name as proejectname', 'courses.name as coursename', 'requests.amount', 'requests.note', 'requests.created_at', 'requests.status')
                 ->get()->toArray();
         
         foreach ($data as $key => $value) {
@@ -41,6 +41,7 @@ class RequestExport implements FromArray, WithHeadings
             'Project',
             'Course',
             'Amount',
+            'Note',
             'Request Date',
             'Status',
         ];

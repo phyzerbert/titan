@@ -37,6 +37,7 @@
                                     <th>Description</th>
                                     <th>Course</th>
                                     <th>Amount</th>
+                                    <th>Note</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Attachment</th>
                                     @if ($role == 'admin' || $role == 'accountant')
@@ -53,6 +54,7 @@
                                         <td class="description">{{$item->description}}</td>
                                         <td class="course" data-value="{{$item->course_id}}">@isset($item->course->name){{$item->course->name}}@endisset</td>
                                         <td class="amount">{{$item->amount}}</td>
+                                        <td class="note">{{$item->note}}</td>
                                         <td class="text-center py-1">
                                             {{-- @if ($role == 'admin')
                                                 <a class="btn btn-sm btn-info btn-fix btn-edit" data-id="{{$item->id}}"><span class="btn-icon text-white"><i class="la la-pencil"></i>Edit</span></a>
@@ -189,6 +191,10 @@
                                 <option value="2">Approve</option>
                             </select>
                         </div> 
+                        <div class="form-group">
+                            <label class="control-label text-right mt-1">Note</label>
+                            <input class="form-control" type="text" name="note" id="response_note" placeholder="Response Note">
+                        </div> 
                     </div>
                     
                     <div class="modal-footer">    
@@ -265,6 +271,7 @@
                 let title = $(this).parents('tr').find('.title').text().trim();
                 let project = $(this).parents('tr').find('.project').text().trim();
                 let amount = $(this).parents('tr').find('.amount').text().trim();
+                let note = $(this).parents('tr').find('.note').text().trim();
                 let exceed = $(this).data('exceed');
                 if((exceed == "1" && user_role != 'admin') || (exceed != "1" && user_role != 'accountant')){
                 // if(exceed != "1" && user_role != 'accountant'){
@@ -275,6 +282,7 @@
                 $("#response_project").val(project);
                 $("#response_title").val(title);
                 $("#response_amount").val(amount);
+                $("#response_note").val(note);
                 $("#responseModal").modal();
             });
 
