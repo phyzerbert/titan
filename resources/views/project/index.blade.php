@@ -258,11 +258,11 @@
                             <span id="limit_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
-                        </div>
+                        {{-- </div>
                         <div class="form-group">
                             <label>Progress</label>
                             <input class="form-control progress" name="progress" type="text">
-                        </div>
+                        </div> --}}
                     </div>
                     
                     <div class="modal-footer">    

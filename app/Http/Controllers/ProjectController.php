@@ -79,7 +79,6 @@ class ProjectController extends Controller
         $project->company_id = $request->get("company_id");
         $project->due_to = $request->get("due_to");
         $project->limit = $request->get("limit");
-        $project->progress = $request->get("progress");
 
         $project->update();
         return back()->with("success", "Updated Successfully.");
