@@ -31,7 +31,7 @@
                         <table class="table table-bordered table-hover" id="requestsTable">
                             <thead class="thead-default thead-lg">
                                 <tr>
-                                    <th class="text-center">No</th>
+                                    <th>No</th>
                                     <th>Company</th>
                                     <th>Project</th>
                                     <th>Course</th>
@@ -39,8 +39,8 @@
                                     <th>Description</th>
                                     <th>Amount</th>
                                     <th>Note</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Attachment</th>
+                                    <th>Status</th>
+                                    <th>Attachment</th>
                                     @if ($role == 'admin' || $role == 'accountant')
                                         <th class="text-center">Action</th>
                                     @endif
