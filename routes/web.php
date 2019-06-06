@@ -53,3 +53,5 @@ Route::post('/project/create/request', 'ProjectController@create_request')->name
 Route::get('/project/request/delete/{id}', 'ProjectController@delete_request')->name('request.delete');
 Route::post('/project/request/response', 'ProjectController@response_to_request')->name('request.response');
 Route::get('/project/request/export', 'ExcelController@export_request')->name('request.export');
+
+Route::get('/project/courses', 'HomeController@member_course')->name('member.course');
