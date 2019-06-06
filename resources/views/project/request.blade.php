@@ -34,9 +34,9 @@
                                     <th class="text-center">No</th>
                                     <th>Company</th>
                                     <th>Project</th>
+                                    <th>Course</th>
                                     <th>Title</th>
                                     <th>Description</th>
-                                    <th>Course</th>
                                     <th>Amount</th>
                                     <th>Note</th>
                                     <th class="text-center">Status</th>
@@ -52,9 +52,9 @@
                                         <td class="text-center">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                         <td class="company">@isset($item->course->project->id){{$item->course->project->company->name}}@endisset</td>
                                         <td class="project" data-value="{{$item->course->project->id}}">@isset($item->course->project->id){{$item->course->project->name}}@endisset</td>
+                                        <td class="course" data-value="{{$item->course_id}}">@isset($item->course->name){{$item->course->name}}@endisset</td>
                                         <td class="title">{{$item->title}}</td>
                                         <td class="description">{{$item->description}}</td>
-                                        <td class="course" data-value="{{$item->course_id}}">@isset($item->course->name){{$item->course->name}}@endisset</td>
                                         <td class="amount">{{$item->amount}}</td>
                                         <td class="note">{{$item->note}}</td>
                                         <td class="text-center py-1">
