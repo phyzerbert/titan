@@ -215,7 +215,7 @@ class ProjectController extends Controller
             $projects = $user->projects;
             $project_array = $user->projects()->pluck('id')->toArray();
             $course_array =Course::whereIn('project_id', $project_array)->pluck('id')->toArray();
-            $data = MoneyRequest::whereIn('course_id', $course_array)->orderBy('created_at')->paginate(10);
+            $data = MoneyRequest::whereIn('course_id', $course_array)->orderBy('created_at', 'desc')->paginate(10);
         }else if($user->role->slug == 'course_member'){
             $course_array = $user->courses->pluck('id')->toArray();
             $project_array = $user->courses->pluck('project_id')->toArray();
