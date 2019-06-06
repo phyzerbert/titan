@@ -81,7 +81,7 @@
             </li>
             <li class="dropdown dropdown-user">
                 <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                    <span>{{Auth::user()->name}}</span>
+                    <span class="ml-2">{{Auth::user()->name}}</span>
                     <img src="@if (isset(Auth::user()->picture)){{asset(Auth::user()->picture)}} @else {{asset('images/avatar128.png')}} @endif" alt="User Image" />
                 </a>
                 <div class="dropdown-menu dropdown-arrow dropdown-menu-right admin-dropdown-menu">
