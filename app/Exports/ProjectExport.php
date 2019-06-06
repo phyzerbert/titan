@@ -18,8 +18,7 @@ class ProjectExport implements FromCollection, WithHeadings
         $data = DB::table('projects')
                 ->join('companies', 'projects.company_id', '=', 'companies.id')
                 ->join('users', 'projects.user_id', '=', 'users.id')
-                ->join('courses', 'courses.id', '=', 'projects.id')
-                ->select('projects.name', 'projects.description', 'users.name as username', 'companies.name as companyname', 'projects.due_to', 'projects.limit', 'courses.avg(progress)', 'projects.created_at')
+                ->select('projects.name', 'projects.description', 'users.name as username', 'companies.name as companyname', 'projects.due_to', 'projects.limit', 'projects.created_at')
                 ->get();
         return $data;
     }
@@ -33,7 +32,6 @@ class ProjectExport implements FromCollection, WithHeadings
             'Company',
             'Due Date',
             'Money Limit',
-            'Progress',
             'Created Date',
         ];
     }
