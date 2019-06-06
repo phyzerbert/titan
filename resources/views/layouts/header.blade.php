@@ -36,28 +36,50 @@
                     <div class="p-3">
                         <ul class="timeline scroller" data-height="250px">
                             @foreach ($recent_messages as $item)
-                                <li class="timeline-item">
+                                <a 
                                     @switch($item->type)
                                         @case("create_project")
-                                            <i class="ti-check timeline-icon"></i>
+                                            href="{{route('project.index')}}"
                                             @break
                                         @case("new_request")
-                                            <i class="fa fa-file-excel-o timeline-icon"></i>
+                                            href="{{route('request.index')}}"
                                             @break
                                         @case("exceed_limit")
-                                            <i class="fa fa-file-excel-o timeline-icon"></i>
+                                            href="{{route('request.index')}}"
                                             @break
                                         @case("new_course")
-                                            <i class="fa fa-file-excel-o timeline-icon"></i>
+                                            href="{{route('project.index')}}"
                                             @break
                                         @case("completed")
-                                            <i class="ti-announcement timeline-icon"></i>
+                                            href="{{route('project.index')}}"
                                             @break
                                         @default
-                                            <i class="fa fa-file-excel-o timeline-icon"></i>
-                                    @endswitch                                    
-                                    {{$item->content}}
-                                </li>
+                                            href="{{route('project.index')}}"
+                                    @endswitch                                
+                                >
+                                    <li class="timeline-item">
+                                        @switch($item->type)
+                                            @case("create_project")
+                                                <i class="ti-check timeline-icon"></i>
+                                                @break
+                                            @case("new_request")
+                                                <i class="fa fa-file-excel-o timeline-icon"></i>
+                                                @break
+                                            @case("exceed_limit")
+                                                <i class="fa fa-file-excel-o timeline-icon"></i>
+                                                @break
+                                            @case("new_course")
+                                                <i class="fa fa-file-excel-o timeline-icon"></i>
+                                                @break
+                                            @case("completed")
+                                                <i class="ti-announcement timeline-icon"></i>
+                                                @break
+                                            @default
+                                                <i class="fa fa-file-excel-o timeline-icon"></i>
+                                        @endswitch                                    
+                                        {{$item->content}}
+                                    </li>
+                                </a>
                             @endforeach
                             {{-- <li class="timeline-item"><i class="ti-check timeline-icon"></i>2 Issue fixed</li>
                             <li class="timeline-item"><i class="ti-announcement timeline-icon"></i>7 new feedback</li>
