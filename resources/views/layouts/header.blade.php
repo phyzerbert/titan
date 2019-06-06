@@ -25,7 +25,7 @@
         <ul class="nav navbar-toolbar">
             <li class="dropdown dropdown-notification">
                 <a class="nav-link dropdown-toggle toolbar-icon" data-toggle="dropdown" href="javascript:;"><i class="ti-bell rel"><span class="notify-signal"></span></i></a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-media">
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" style="left:120px !important">
                     <div class="dropdown-arrow"></div>
                     <div class="p-3">
                         <ul class="timeline scroller" data-height="250px">
