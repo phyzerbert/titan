@@ -19,31 +19,31 @@
         </div>
         <div class="page-content fade-in-up">
             <div class="ibox">
-                <div class="ibox-header p-3">
-                    <form action="" method="POST" class="form-inline">
-                        @csrf 
-                        <label class="control-label mr-sm-2 mb-2" for="period">Company: </label>
-                        <select class="form-control form-control-sm mr-sm-3 mb-2" name="company_id" id="search_company">
-                            <option value="">Select a company</option>
-                            @foreach ($companies as $item)
-                                <option value="{{$item->id}}" @if ($company_id == $item->id) selected @endif>{{$item->name}}</option>
-                            @endforeach
-                        </select>
-                        <label class="control-label mr-sm-3 mb-2" for="name">Created at: </label>
-                        <input type="text" name="period" id="search_date" class="form-control form-control-sm mr-sm-2 mb-2" value="{{ $period }}" autocomplete="off" />
-                        <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;Search</button>
-                        <button type="button" class="btn btn-sm btn-danger ml-2 mb-2" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;Reset</button>
-                    </form>
-                </div>
-                <div class="ibox-body">                   
-                    <div class="text-right mb-4">
+                <div class="ibox-header row p-2">
+                    <div class="col-md-8">
+                        <form action="" method="POST" class="form-inline">
+                            @csrf 
+                            <select class="form-control form-control-sm mr-sm-3 mb-2" name="company_id" id="search_company">
+                                <option value="">Select a company</option>
+                                @foreach ($companies as $item)
+                                    <option value="{{$item->id}}" @if ($company_id == $item->id) selected @endif>{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                            <input type="text" name="period" id="search_date" class="form-control form-control-sm mr-sm-2 mb-2" value="{{ $period }}" placeholder="Created date" autocomplete="off" />
+                            <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;Search</button>
+                            <button type="button" class="btn btn-sm btn-danger ml-2 mb-2" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;Reset</button>
+                        </form>
+                    </div>
+                    <div class="col-md-4 text-right">
                         @if ($role == 'admin' || $role == 'accountant')                        
-                            <a href="{{route('project.export')}}" id="btn-export" class="btn btn-info btn-fix"><span class="btn-icon"><i class="la la-file-excel-o"></i>Export</span></a>
+                            <a href="{{route('project.export')}}" id="btn-export" class="btn btn-sm btn-info btn-fix"><span class="btn-icon"><i class="la la-file-excel-o"></i>Export</span></a>
                         @endif
                         @if ($role == 'admin')     
-                            <button type="button" id="btn-add" class="btn btn-primary btn-fix"><span class="btn-icon"><i class="ti-plus"></i>Add New</span></button>
+                            <button type="button" id="btn-add" class="btn btn-sm btn-primary btn-fix"><span class="btn-icon"><i class="ti-plus"></i>Add New</span></button>
                         @endif
-                    </div>                    
+                    </div>
+                </div>
+                <div class="ibox-body py-2">                  
                     <div class="table-responsive row">
                         <table class="table table-bordered table-hover" id="usersTable">
                             <thead class="thead-default thead-lg">
