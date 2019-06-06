@@ -94,7 +94,7 @@ class HomeController extends Controller
             $key = $dt->format('Y-m-d');
             $key1 = $dt->format('M/d');
             array_push($key_array, $key1);
-            $daily_money = $mod->whereDate('created_at', $key)->sum('amount');
+            $daily_money = $mod->where('status', 2)->whereDate('created_at', $key)->sum('amount');
             array_push($money_array, $daily_money);
         }
         // ********** End Chart ***********
@@ -125,7 +125,41 @@ class HomeController extends Controller
         $return['total_requested_money'] = $user->requests()->sum('amount');
         $return['total_approved_money'] = $user->requests()->where('status', 2)->sum('amount');
 
-        return view('manager.home', compact('return'));
+        $return['week_money'] = $this->getWeekData('sum(amount)', "and user_id = $user->id");
+        $return['month_money'] = $this->getMonthData('sum(amount)', "and user_id = $user->id");
+        $return['year_money'] = $this->getYearData('sum(amount)', "and user_id = $user->id");
+        $return['today_money'] = $this->getTodayData('sum(amount)', "and user_id = $user->id");
+        
+        // ******** Start Chart *********
+        $mod = $user->requests();
+        $period = $daily_money = '';
+        if($request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+        }
+        if(isset($from) && isset($to)){
+            $chart_start = Carbon::createFromFormat('Y-m-d', $from);
+            $chart_end = Carbon::createFromFormat('Y-m-d', $to);
+        }else{
+            $chart_start = Carbon::now()->startOfMonth();
+            $chart_end = Carbon::now()->endOfMonth();
+        }
+        
+        $key_array = $money_array = array();
+        for ($dt=$chart_start; $dt < $chart_end; $dt->addDay()) {
+            $key = $dt->format('Y-m-d');
+            $key1 = $dt->format('M/d');
+            array_push($key_array, $key1);
+            $daily_money = $mod->whereDate('created_at', $key)->sum('amount');
+            // dump($daily_money);
+            array_push($money_array, $daily_money);
+        }
+        // ********** End Chart ***********
+        $user_projects = $user->projects()->pluck('id')->toArray();
+        $recent_courses = Course::whereIn('id', $user_projects)->orderBy('created_at', 'desc')->limit(5)->get();
+        $recent_notifications = Notification::orderBy('created_at', 'desc')->limit(5)->get();
+        return view('manager.home', compact('return', 'key_array', 'money_array', 'period', 'recent_courses', 'recent_notifications'));
     }
 
     public function member_home(Request $request){
