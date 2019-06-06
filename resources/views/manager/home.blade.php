@@ -16,7 +16,7 @@
                             <div class="mr-5">
                                 <h3 class="font-strong text-primary">{{$return['total_projects']}}</h3>
                                 <div class="text-muted">TOTAL PROJECTS</div>
-                            </div>                            
+                            </div class="mr-3">                            
                             <div>
                                 <h3 class="font-strong text-primary">{{$return['completed_projects']}}</h3>
                                 <div class="text-muted">COMPLETED PROJECTS</div>
@@ -34,7 +34,7 @@
                                 <h3 class="font-strong text-pink">{{$return['total_requests']}}</h3>
                                 <div class="text-muted">TOTAL REQUESTS</div>
                             </div>
-                            <div>
+                            <div class="mr-3">
                                 <h3 class="font-strong text-pink">{{$return['approved_requests']}}</h3>
                                 <div class="text-muted">APPRPVED REQUESTS</div>
                             </div>
@@ -51,7 +51,7 @@
                                 <h3 class="font-strong text-success">{{$return['total_requested_money']}}</h3>
                                 <div class="text-muted">REQUESTED MONEY</div>
                             </div>
-                            <div>
+                            <div class="mr-3">
                                 <h3 class="font-strong text-success">{{$return['total_approved_money']}}</h3>
                                 <div class="text-muted">APPROVED MONEY</div>
                             </div>
@@ -103,7 +103,7 @@
                                 <label for="period">Date: </label>
                                 <input type="text" class="form-control form-control-sm mr-sm-2 ml-3" name="period" id="period" autocomplete="off" value="{{$period}}" style="width:200px;">
                                 <button type="submit" class="btn btn-primary btn-sm">Search</button>
-                                <button type="button" class="btn btn-success btn-sm ml-1" id="btn-reset">Reset</button>
+                                <button type="button" class="btn btn-success btn-sm mr-1" id="btn-reset">Reset</button>
                             </form>
                         </div>
                         <div class="ibox-body">
