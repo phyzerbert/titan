@@ -51,7 +51,7 @@
                                     </span>
                                 </div>                              
                                 <div class="col-3 pl-4">
-                                    <h6 class="mb-3">Project Progress</h6>
+                                    <h6 class="mb-3">Course Progress</h6>
                                     <span class="h2 mr-3"><i class="fa fa-spinner text-primary h1 mb-0 mr-2"></i>
                                         <span>{{$course->progress}}%</span>
                                     </span>
