@@ -62,6 +62,10 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
+                                    @php
+                                        $progress = $item->courses->avg('progress');
+                                        $progress = intval($progress);
+                                    @endphp
                                     <tr>
                                         <td class="text-center">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                         <td class="company" data-value="{{$item->company_id}}">@isset($item->company->name){{$item->company->name}}@endisset</td>
@@ -70,9 +74,9 @@
                                         <td class="description">{{$item->description}}</td>
                                         <td class="due_to">{{$item->due_to}}</td>
                                         <td class="limit" data-value="{{$item->limit}}">{{$item->limit}}</td>
-                                        <td class="prog" data-value="{{$item->progress}}">
+                                        <td class="prog" data-value="{{$progress}}">
                                             <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{$item->progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$item->progress}}%;">{{$item->progress}}%</div>
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{$progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$progress}}%;">{{$progress}}%</div>
                                             </div>
                                         </td>
                                         <td class="created_at">{{$item->created_at}}</td>
