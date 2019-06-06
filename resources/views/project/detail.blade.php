@@ -172,7 +172,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label class="control-label text-right mt-1">Name<span class="text-danger">*</span></label>
-                                <input class="form-control name" type="text" name="name" id="edit_name" placeholder="Name" required>
+                                <input class="form-control name" type="text" name="name" id="edit_name" placeholder="Name" readonly required>
                                 <span id="name_error" class="invalid-feedback">
                                     <strong></strong>
                                 </span>
