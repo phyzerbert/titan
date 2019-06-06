@@ -171,6 +171,7 @@ class ProjectController extends Controller
             Notification::create([
                 'type' => 'completed',
                 'content' => $content,
+                'link' => $data['id'],
             ]);
             $data['status'] = 4;
         }

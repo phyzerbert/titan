@@ -51,7 +51,7 @@
                                             href="{{route('course.detail', $item->link)}}"
                                             @break
                                         @case("completed")
-                                            href="{{route('project.index')}}"
+                                            href="{{route('course.detail', $item->link)}}"
                                             @break
                                         @default
                                             href="{{route('project.index')}}"
