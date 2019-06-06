@@ -27,12 +27,6 @@
                 <a class="nav-link dropdown-toggle toolbar-icon" data-toggle="dropdown" href="javascript:;"><i class="ti-bell rel"><span class="notify-signal"></span></i></a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-media">
                     <div class="dropdown-arrow"></div>
-                    {{-- <div class="dropdown-header text-center">
-                        <div>
-                            <span class="font-18"><strong>14 New</strong> Notifications</span>
-                        </div>
-                        <a class="text-muted font-13" href="javascript:;">view all</a>
-                    </div> --}}
                     <div class="p-3">
                         <ul class="timeline scroller" data-height="250px">
                             @foreach ($recent_messages as $item)

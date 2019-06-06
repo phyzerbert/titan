@@ -1934,8 +1934,8 @@ body.fullscreen-mode {
 }
 
 .dropdown-menu.dropdown-menu-right .dropdown-arrow {
-    right: 0;
-    left: auto
+    right: auto;
+    left: 0
 }
 
 .dropdown-menu>li>a {
@@ -3509,7 +3509,7 @@ select.form-control-sm:not([size]):not([multiple]) {
     position: relative;
     padding: 0;
     list-style: none;
-    padding-left: 10px
+    padding-right: 10px
 }
 
 .timeline:before {
@@ -3520,7 +3520,7 @@ select.form-control-sm:not([size]):not([multiple]) {
     height: 100%;
     top: 0;
     bottom: 0;
-    left: 10px;
+    right: 10px;
     background-color: #ebedf2
 }
 
@@ -3558,7 +3558,7 @@ select.form-control-sm:not([size]):not([multiple]) {
     position: absolute;
     height: 20px;
     width: 20px;
-    left: -10px;
+    right: -10px;
     text-align: center;
     line-height: 20px;
     top: 50%;
