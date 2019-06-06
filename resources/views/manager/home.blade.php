@@ -67,8 +67,20 @@
     <!-- PAGE LEVEL PLUGINS-->
     <script src="{{ asset('master/vendors/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('master/vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js') }}"></script>
-    <script src="{{ asset('master/vendors/jvectormap/jquery-jvectormap-2.0.3.min.js') }}"></script>
-    <script src="{{ asset('master/vendors/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
 
-    <script src="{{ asset('master/js/scripts/dashboard_visitors.js') }}"></script>
+    
+    <script>
+        $(function(){
+            $('.easypie').each(function(){
+                $(this).easyPieChart({
+                trackColor: $(this).attr('data-trackColor') || '#f2f2f2',
+                scaleColor: false,
+                });
+            });
+            $("#period").dateRangePicker();
+            $("#btn-reset").click(function(){
+                $("#period").val('');
+            })
+        });
+    </script>
 @endsection
