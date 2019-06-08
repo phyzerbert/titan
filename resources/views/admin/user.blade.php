@@ -4,28 +4,28 @@
     <div class="content-wrapper">
         <!-- START PAGE CONTENT-->
         <div class="page-heading">
-            <h1 class="page-title">User Management</h1>
+            <h1 class="page-title">إدارة المستخدمين</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/"><i class="la la-home font-20"></i></a></li>
-                <li class="breadcrumb-item">User Management</li>
+                <li class="breadcrumb-item">إدارة المستخدمين</li>
             </ol>
         </div>
         <div class="page-content fade-in-up">
             <div class="ibox">
                 <div class="ibox-body">
                     <div class="text-right mb-4">
-                        <button type="button" id="btn-add" class="btn btn-primary btn-fix"><span class="btn-icon"><i class="ti-plus"></i>Add New</span></button>
+                        <button type="button" id="btn-add" class="btn btn-primary btn-fix"><span class="btn-icon"><i class="ti-plus"></i>أضف مستخدم جديد</span></button>
                     </div>
                     <div class="table-responsive row">
                         <table class="table table-bordered table-hover" id="usersTable">
                             <thead class="thead-default thead-lg">
                                 <tr>
-                                    <th class="text-center">No</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Created at</th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-center">الرقم</th>
+                                    <th>الإسم</th>
+                                    <th>الإيميل</th>
+                                    <th>الصلاحية</th>
+                                    <th>تاريخ الإنشاء</th>
+                                    <th class="text-center">الإجراءات</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,8 +37,8 @@
                                         <td>{{$item->role->name}}</td>
                                         <td>{{$item->created_at}}</td>
                                         <td class="text-center py-1">
-                                            <a class="btn btn-sm btn-info btn-fix btn-edit" data-id="{{$item->id}}"><span class="btn-icon text-white"><i class="la la-pencil"></i>Edit</span></a>
-                                            <a href="{{route('user.delete', $item->id)}}" class="btn btn-sm btn-danger btn-fix" onclick="return window.confirm('Are you sure?')"><span class="btn-icon text-white"><i class="la la-trash"></i>Remove</span></a>
+                                            <a class="btn btn-sm btn-info btn-fix btn-edit" data-id="{{$item->id}}"><span class="btn-icon text-white"><i class="la la-pencil"></i>تعديل</span></a>
+                                            <a href="{{route('user.delete', $item->id)}}" class="btn btn-sm btn-danger btn-fix" onclick="return window.confirm('Are you sure?')"><span class="btn-icon text-white"><i class="la la-trash"></i>حذف</span></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -46,7 +46,7 @@
                         </table>
                         <div class="clearfix">
                             <div class="float-left" style="margin: 0;">
-                                <p>Total <strong style="color: red">{{ $data->total() }}</strong> Users</p>
+                                <p>إجمالي <strong style="color: red">{{ $data->total() }}</strong> المستخدمين</p>
                             </div>
                             <div class="float-right" style="margin: 0;">
                                 {!! $data->appends([])->links() !!}
@@ -67,33 +67,33 @@
                     @csrf
                     <input type="hidden" name="role_id" value="3" />
                     <div class="modal-header">
-                        <h4 class="modal-title">Add New Project Manager</h4>
+                        <h4 class="modal-title">اضافة مستخدم جديد</h4>
                         <button type="button" class="close" data-dismiss="modal">×</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Name<span class="text-danger">*</span></label>
-                            <input class="form-control" type="text" name="name" id="add_name" placeholder="Name" required>
+                            <label class="control-label text-right mt-1">الإسم<span class="text-danger">*</span></label>
+                            <input class="form-control" type="text" name="name" id="add_name" placeholder="إسم المستخدم" required>
                             <span id="name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Email Address<span class="text-danger">*</span></label>
-                            <input class="form-control" type="email" name="email" id="add_email" placeholder="Email Address" required >
+                            <label class="control-label text-right mt-1">البريد الإلكتروني<span class="text-danger">*</span></label>
+                            <input class="form-control" type="email" name="email" id="add_email" placeholder="أضف البريد الإلكتروني بشكل صحيح" required >
                             <span id="email_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Role<span class="text-danger">*</span></label>
+                            <label class="control-label text-right mt-1">الصلاحية<span class="text-danger">*</span></label>
                             <select class="form-control role" type="email" name="role_id" id="add_role" required >
-                                <option value="4">Course Member</option>
-                                <option value="3">Project Manager</option>
-                                <option value="2">Accountant</option>
-                                <option value="1">Admin</option>
+                                <option value="4">منسق</option>
+                                <option value="3">مدير مشاريع</option>
+                                <option value="2">محاسب</option>
+                                <option value="1">مدير النظام</option>
                             </select>
                             <span id="role_error" class="invalid-feedback">
                                 <strong></strong>
@@ -101,23 +101,23 @@
                         </div>
 
                         <div class="form-group password-field">
-                            <label class="control-label">Password</label>
-                            <input type="password" name="password" id="add_password" class="form-control" placeholder="Password">
+                            <label class="control-label">كلمة المرور</label>
+                            <input type="password" name="password" id="add_password" class="form-control" placeholder="كلمة المرور">
                             <span id="password_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
     
                         <div class="form-group password-field">
-                            <label class="control-label">Password Confirm</label>
-                            <input type="password" name="password_confirmation" id="add_confirmpassword" class="form-control" placeholder="Password Confirm">
+                            <label class="control-label">كرر كلمة المرور</label>
+                            <input type="password" name="password_confirmation" id="add_confirmpassword" class="form-control" placeholder="أعد كتابة كلمة المرور">
                         </div>
 
                     </div>
                     
                     <div class="modal-footer">    
-                        <button type="submit" class="btn btn-primary ml-2">Save</button>                       
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary ml-2">حفظ</button>                       
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
                     </div>
                 </form>
             </div>
@@ -131,44 +131,44 @@
                     @csrf
                     <input type="hidden" class="id" name="id" />
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit User</h4>
+                        <h4 class="modal-title">تعديل المستخدم</h4>
                         <button type="button" class="close" data-dismiss="modal">×</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Name<span class="text-danger">*</span></label>
-                            <input class="form-control name" type="text" name="name" id="edit_name" placeholder="Name" required>
+                            <label class="control-label text-right mt-1">الإسم<span class="text-danger">*</span></label>
+                            <input class="form-control name" type="text" name="name" id="edit_name" placeholder="الإسم" required>
                             <span id="name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Email Address<span class="text-danger">*</span></label>
-                            <input class="form-control email" type="email" name="email" id="edit_email" placeholder="Email Address" required >
+                            <label class="control-label text-right mt-1">البريد الإلكتروني<span class="text-danger">*</span></label>
+                            <input class="form-control email" type="email" name="email" id="edit_email" placeholder="تأكد من البريد الإلكتروني" required >
                             <span id="email_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
 
                         <div class="form-group password-field">
-                            <label class="control-label">Password</label>
-                            <input type="password" name="password" id="edit_password" class="form-control" placeholder="Password">
+                            <label class="control-label">كلمة المرور</label>
+                            <input type="password" name="password" id="edit_password" class="form-control" placeholder="كلمة المرور">
                             <span id="password_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
     
                         <div class="form-group password-field">
-                            <label class="control-label">Password Confirm</label>
-                            <input type="password" name="password_confirmation" id="edit_confirmpassword" class="form-control" placeholder="Password Confirm">
+                            <label class="control-label">كرر كلمة المرور</label>
+                            <input type="password" name="password_confirmation" id="edit_confirmpassword" class="form-control" placeholder="أعد كتابة كلمة المرور">
                         </div>
 
                     </div>
                     
                     <div class="modal-footer">    
-                        <button type="submit" class="btn btn-primary ml-2">Save</button>                       
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary ml-2">حفظ</button>                       
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
                     </div>
                 </form>
             </div>

@@ -7,31 +7,31 @@
     <div class="content-wrapper">
         <!-- START PAGE CONTENT-->
         <div class="page-heading">
-            <h1 class="page-title">Project Management</h1>
+            <h1 class="page-title">إدارة المشاريع</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/"><i class="la la-home font-20"></i></a></li>
-                <li class="breadcrumb-item">Project Management</li>
+                <li class="breadcrumb-item">إدارة المشاريع</li>
             </ol>
         </div>
         <div class="page-content fade-in-up">
             <div class="ibox">
                 <div class="ibox-body">
                     <div class="text-right mb-4">
-                        <button type="button" id="btn-add" class="btn btn-primary btn-fix"><span class="btn-icon"><i class="ti-plus"></i>Add New</span></button>
+                        <button type="button" id="btn-add" class="btn btn-primary btn-fix"><span class="btn-icon"><i class="ti-plus"></i>أضف مشروع</span></button>
                     </div>
                     <div class="table-responsive row">
                         <table class="table table-bordered table-hover" id="usersTable">
                             <thead class="thead-default thead-lg">
                                 <tr>
-                                    <th class="text-center">No</th>
-                                    <th>Name</th>
-                                    <th>Manager</th>
-                                    <th>Company</th>
-                                    <th>Description</th>
-                                    <th>Due to Date</th>
-                                    <th>Limit</th>
-                                    <th>Progress</th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-center">رقم</th>
+                                    <th>الإسم</th>
+                                    <th>المدير</th>
+                                    <th>الشركة</th>
+                                    <th>الوصف</th>
+                                    <th>تاريخ البدء</th>
+                                    <th>حد الصرف</th>
+                                    <th>مؤشر الإنجاز</th>
+                                    <th class="text-center">الإجراءات</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,8 +46,8 @@
                                         <td class="limit" data-value="{{$item->limit}}">{{$item->limit}}</td>
                                         <td class="prog" data-value="{{$item->progress}}">{{$item->progress}}%</td>
                                         <td class="text-center py-1">
-                                            <a class="btn btn-sm btn-info btn-fix btn-edit" data-id="{{$item->id}}"><span class="btn-icon text-white"><i class="la la-pencil"></i>Edit</span></a>
-                                            <a href="{{route('project.delete', $item->id)}}" class="btn btn-sm btn-danger btn-fix" onclick="return window.confirm('Are you sure?')"><span class="btn-icon text-white"><i class="la la-trash"></i>Remove</span></a>
+                                            <a class="btn btn-sm btn-info btn-fix btn-edit" data-id="{{$item->id}}"><span class="btn-icon text-white"><i class="la la-pencil"></i>تعديل</span></a>
+                                            <a href="{{route('project.delete', $item->id)}}" class="btn btn-sm btn-danger btn-fix" onclick="return window.confirm('Are you sure?')"><span class="btn-icon text-white"><i class="la la-trash"></i>حذف</span></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -55,7 +55,7 @@
                         </table>
                         <div class="clearfix">
                             <div class="float-left" style="margin: 0;">
-                                <p>Total <strong style="color: red">{{ $data->total() }}</strong> Projects</p>
+                                <p>اجمالي <strong style="color: red">{{ $data->total() }}</strong> المشاريع</p>
                             </div>
                             <div class="float-right" style="margin: 0;">
                                 {!! $data->appends([])->links() !!}
@@ -75,12 +75,12 @@
                 <form action="{{route('project.create')}}" method="post" id="add_form">
                     @csrf
                     <div class="modal-header">
-                        <h4 class="modal-title">Add New Project</h4>
+                        <h4 class="modal-title">أضف مشروع جديد</h4>
                         <button type="button" class="close" data-dismiss="modal">×</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Name<span class="text-danger">*</span></label>
+                            <label class="control-label text-right mt-1">إسم المشروع (ورقم العقد )<span class="text-danger">*</span></label>
                             <input class="form-control" type="text" name="name" id="add_name" placeholder="Name" required>
                             <span id="name_error" class="invalid-feedback">
                                 <strong></strong>
@@ -88,9 +88,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label">Manager<span class="text-danger">*</span></label>
+                            <label class="control-label">مدير المشروع<span class="text-danger">*</span></label>
                             <select name="user_id" id="add_manager" class="form-control" placeholder="Manager">
-                                <option value="">Select a project manager</option>
+                                <option value=""> اختر مدير للمشروع</option>
                                 @foreach ($managers as $item)
                                     <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -101,9 +101,9 @@
                         </div>                        
                         
                         <div class="form-group">
-                            <label class="control-label">Company<span class="text-danger">*</span></label>
+                            <label class="control-label">الشركة <span class="text-danger">*</span></label>
                             <select name="company_id" id="add_company" class="form-control" placeholder="Company">
-                                <option value="">Select a company</option>
+                                <option value="">اختر الشركة </option>
                                 @foreach ($companies as $item)
                                     <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -114,14 +114,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Description<span class="text-danger">*</span></label>
+                            <label class="control-label text-right mt-1">وصف المشروع<span class="text-danger">*</span></label>
                             <textarea class="form-control" name="description" id="add_description" rows="4" placeholder="Description" required></textarea>
                             <span id="email_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>                        
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Due to Date<span class="text-danger">*</span></label>
+                            <label class="control-label text-right mt-1">تاريخ العمل<span class="text-danger">*</span></label>
                             <div class="input-group date">
                                 <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
                                 <input class="form-control" type="text" name="due_to" id="add_due_to" autocomplete="off" />
@@ -131,8 +131,8 @@
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Money Limit<span class="text-danger">*</span></label>
-                            <input class="form-control" type="number" name="limit" id="add_limit" placeholder="Money Limit" required>
+                            <label class="control-label text-right mt-1">حد الصرف<span class="text-danger">*</span></label>
+                            <input class="form-control" type="number" name="limit" id="add_limit" placeholder="p] hgwvt" required>
                             <span id="limit_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
@@ -140,7 +140,7 @@
                     </div>
                     
                     <div class="modal-footer">    
-                        <button type="submit" class="btn btn-primary">Save</button>                       
+                        <button type="submit" class="btn btn-primary">حفظ</button>                       
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -155,12 +155,12 @@
                     @csrf
                     <input type="hidden" class="id" name="id" />
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit Project</h4>
+                        <h4 class="modal-title">تعديل المشروع</h4>
                         <button type="button" class="close" data-dismiss="modal">×</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Name<span class="text-danger">*</span></label>
+                            <label class="control-label text-right mt-1">الإسم<span class="text-danger">*</span></label>
                             <input class="form-control name" type="text" name="name" id="edit_name" placeholder="Name" required>
                             <span id="name_error" class="invalid-feedback">
                                 <strong></strong>
@@ -168,9 +168,9 @@
                         </div>
 
                         <div class="form-group password-field">
-                            <label class="control-label">Manager<span class="text-danger">*</span></label>
+                            <label class="control-label">مدير المشروع<span class="text-danger">*</span></label>
                             <select name="user_id" id="edit_manager" class="form-control manager" placeholder="Manager">
-                                <option value="">Select a project manager</option>
+                                <option value="">اختر مدير المشروع</option>
                                 @foreach ($managers as $item)
                                     <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -181,9 +181,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label">Company<span class="text-danger">*</span></label>
+                            <label class="control-label">الشركة<span class="text-danger">*</span></label>
                             <select name="company_id" id="add_company" class="form-control company" placeholder="Company">
-                                <option value="">Select a company</option>
+                                <option value="">اختر الشركة </option>
                                 @foreach ($companies as $item)
                                     <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -194,7 +194,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Description<span class="text-danger">*</span></label>
+                            <label class="control-label text-right mt-1">الوصف<span class="text-danger">*</span></label>
                             <textarea class="form-control description" name="description" id="edit_description" rows="4" placeholder="Description" required></textarea>
                             <span id="email_error" class="invalid-feedback">
                                 <strong></strong>
@@ -202,7 +202,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Due to Date<span class="text-danger">*</span></label>
+                            <label class="control-label text-right mt-1">تاريخ بدء العمل<span class="text-danger">*</span></label>
                             <div class="input-group date">
                                 <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
                                 <input class="form-control due_to" type="text" name="due_to" id="edit_due_to" autocomplete="off" />
@@ -212,21 +212,21 @@
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label text-right mt-1">Money Limit<span class="text-danger">*</span></label>
-                            <input class="form-control limit" type="number" name="limit" id="edit_limit" placeholder="Money Limit" required>
+                            <label class="control-label text-right mt-1">حد الصرف<span class="text-danger">*</span></label>
+                            <input class="form-control limit" type="number" name="limit" id="edit_limit" placeholder="حد الصرف" required>
                             <span id="limit_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label>Progress</label>
+                            <label>الإنجاز</label>
                             <input class="form-control progress" name="progress" type="text">
                         </div>
                     </div>
                     
                     <div class="modal-footer">    
-                        <button type="submit" class="btn btn-primary">Save</button>                       
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">حفظ</button>                       
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">إغلاق</button>
                     </div>
                 </form>
             </div>

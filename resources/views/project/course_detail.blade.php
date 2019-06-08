@@ -41,7 +41,15 @@
                                 <div class="col-3 pl-3">
                                     <h6 class="mb-3">Course Status</h6>
                                     <span class="h2 mr-3"><i class="fa fa-list text-primary h1 mb-0 mr-2"></i>
-                                        <span>{{$course->status}}</span>
+                                        @if ($course->status == 1)
+                                            <span class="badge badge-primary badge-pill">New</span>
+                                        @elseif ($course->status == 2)
+                                            <span class="badge badge-secondary badge-pill">In Progress</span>
+                                        @elseif ($course->status == 3)
+                                            <span class="badge badge-info badge-pill">On Hold</span>
+                                        @elseif ($course->status == 4)
+                                            <span class="badge badge-success badge-pill">Completed</span>
+                                        @endif
                                     </span>
                                 </div>
                                 <div class="col-3 pl-4">

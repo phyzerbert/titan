@@ -20,16 +20,37 @@
         <!-- END TOP-LEFT TOOLBAR-->
         <!-- START TOP-RIGHT TOOLBAR-->
         @php
-            $recent_messages = \App\Models\Notification::orderBy('created_at', 'desc')->limit(10)->get();
+            $recent_messages = \App\Models\Notification::orderBy('created_at', 'desc')->limit(5)->get();
         @endphp
         <ul class="nav navbar-toolbar">
             <li class="dropdown dropdown-notification">
                 <a class="nav-link dropdown-toggle toolbar-icon" data-toggle="dropdown" href="javascript:;"><i class="ti-bell rel"><span class="notify-signal"></span></i></a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" style="left:120px !important">
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-media">
                     <div class="dropdown-arrow"></div>
+                    <div class="dropdown-header text-center">
+                        <div>
+                            <span class="font-18"><strong>5 New</strong> Notifications</span>
+                        </div>
+                        <a class="text-muted font-13" href="javascript:;">view all</a>
+                    </div>
                     <div class="p-3">
                         <ul class="timeline scroller" data-height="250px">
                             @foreach ($recent_messages as $item)
+                                @php
+                                    $posted_time = new DateTime($item->created_at);
+                                    $now = new DateTime();
+                                    $interval = $posted_time->diff($now);
+                                    if($interval->d >= 1){
+                                        $time = $interval->d. " days";
+                                    }else if($interval->h >= 1){
+                                        $time = $interval->h. " hours";
+                                    }else if($interval->i >= 1){
+                                        $time = $interval->i. " mins";
+                                    }else{
+                                        $time = "Just now";
+                                    }
+                                    
+                                @endphp 
                                 <a 
                                     @switch($item->type)
                                         @case("create_project")
@@ -71,7 +92,8 @@
                                             @default
                                                 <i class="fa fa-file-excel-o timeline-icon"></i>
                                         @endswitch                                    
-                                        {{$item->content}}
+                                        {{$item->content}}&nbsp;
+                                        <small class="float-right text-muted ml-2 nowrap">{{$time}}</small>
                                     </li>
                                 </a>
                             @endforeach

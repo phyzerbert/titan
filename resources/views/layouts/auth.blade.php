@@ -24,7 +24,7 @@
         <!-- BEGIN PAGA BACKDROPS-->
         <div class="sidenav-backdrop backdrop"></div>
         <div class="preloader-backdrop">
-            <div class="page-preloader">Loading</div>
+            <div class="page-preloader">تحميل</div>
         </div>
         <!-- CORE PLUGINS-->
         <script src="{{ asset('master/vendors/jquery/dist/jquery.min.js') }}"></script>
