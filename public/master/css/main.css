@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Cairo&display=swap&subset=arabic:300,400,500,600,700);
 .clf:after,
 .clf:before {
     content: '';
@@ -11,12 +11,12 @@
 }
 
 html {
-    font-size: 14px
+    font-size: 16px
 }
 
 body {
     overflow-x: hidden;
-    font-family: Poppins;
+    font-family: tahoma;
     background-color: #f2f3fa;
     color: #34495f
 }
@@ -208,7 +208,7 @@ pre:hover .clipboard-copy {
 }
 
 .btn-fix {
-    min-width: 120px;
+    min-width: 110px;
     text-align: center
 }
 
@@ -2512,7 +2512,7 @@ select.form-control-sm:not([size]):not([multiple]) {
 }
 
 .input-group-icon-left .form-control {
-    padding-left: 40px
+    padding-right: 40px
 }
 
 .input-group-icon-left .input-icon-left {
@@ -3530,7 +3530,7 @@ select.form-control-sm:not([size]):not([multiple]) {
 
 .timeline .timeline-item {
     position: relative;
-    padding: 10px 15px 10px 30px;
+    padding: 17px 15px 10px 7px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -5130,7 +5130,7 @@ body.drawer-sidebar .page-sidebar.shined {
 }
 
 body.drawer-sidebar .content-wrapper {
-    margin-left: 0
+    margin-right: 0
 }
 
 body.drawer-sidebar .page-brand {

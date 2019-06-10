@@ -273,6 +273,27 @@ class HomeController extends Controller
         return back()->with("success", "Updated User Successfully.");
     }
 
+    public function notifications(Request $request){
+        config(['site.c_page' => 'notification']);
+        $content = '';
+        $mod = new Notification;
+        if($request->get('content') != null){
+            $content = $request->get('content');
+            $mod = $mod->where('content', 'LIKE', "%$content%");
+        }
+        $data = $mod->orderBy('created_at', 'desc')->paginate(10);
+        return view('notification', compact('data', 'content'));
+    }
+
+    public function delete_notification(Request $request){
+        $data =  explode(",", $request->get('deletemessages'));
+        foreach ($data as $item) {
+            $noti = Notification::find($item);
+    	    $noti->delete();
+        }
+        return response()->json('success');
+    }
+
     // **************************************************************************88
 
     public function getTodayData($select, $where = ''){

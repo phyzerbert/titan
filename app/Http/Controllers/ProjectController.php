@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailable;
 use App\Models\Project;
 use App\Models\Course;
 use App\Models\CourseUser;
@@ -63,6 +65,9 @@ class ProjectController extends Controller
             'type' => 'create_project',
             'content' => $content,
         ]);
+        foreach (User::all() as $item) {
+            Mail::to($item->email)->send(new SendMailable($content));
+        }
         return back()->with('success', 'Created Successfully');
     }
 
@@ -149,6 +154,10 @@ class ProjectController extends Controller
             'link' => $course->id,
         ]);
 
+        foreach (User::all() as $item) {
+            Mail::to($item->email)->send(new SendMailable($content));
+        }
+
         return redirect(route('project.detail', $request->get('project_id')))->with('success', 'Created successfully');        
     }
 
@@ -173,6 +182,9 @@ class ProjectController extends Controller
                 'content' => $content,
                 'link' => $data['id'],
             ]);
+            foreach (User::all() as $item) {
+                Mail::to($item->email)->send(new SendMailable($content));
+            }
             $data['status'] = 4;
         }
         $course->update($data);
@@ -253,6 +265,9 @@ class ProjectController extends Controller
                 'type' => 'exceed_limit',
                 'content' => $content,
             ]);
+            foreach (User::all() as $item) {
+                Mail::to($item->email)->send(new SendMailable($content));
+            }
         }
         if($request->file('attachment') != null){
             $image = request()->file('attachment');
@@ -267,6 +282,9 @@ class ProjectController extends Controller
             'type' => 'new_request',
             'content' => $content,
         ]);
+        foreach (User::all() as $item) {
+            Mail::to($item->email)->send(new SendMailable($content));
+        }
         return back()->with('success', 'Requested Successfully');
     }
 

@@ -55,3 +55,6 @@ Route::post('/project/request/response', 'ProjectController@response_to_request'
 Route::get('/project/request/export', 'ExcelController@export_request')->name('request.export');
 
 Route::get('/project/courses', 'HomeController@member_course')->name('member.course');
+
+Route::any('/notifications', 'HomeController@notifications')->name('notification.index');
+Route::post('/notificateions/delete', 'HomeController@delete_notification')->name('notification.delete');

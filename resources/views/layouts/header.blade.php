@@ -31,7 +31,7 @@
                         <div>
                             <span class="font-18"><strong>5 New</strong> Notifications</span>
                         </div>
-                        <a class="text-muted font-13" href="javascript:;">view all</a>
+                        <a class="text-muted font-13" href="{{route('notification.index')}}">view all</a>
                     </div>
                     <div class="p-3">
                         <ul class="timeline scroller" data-height="250px">
