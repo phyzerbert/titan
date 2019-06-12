@@ -16,7 +16,7 @@ class SendNotification extends Mailable
      *
      * @return void
      */
-    protected $content;
+    public $content;
 
     public function __construct($content)
     {

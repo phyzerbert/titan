@@ -58,3 +58,5 @@ Route::get('/project/courses', 'HomeController@member_course')->name('member.cou
 
 Route::any('/notifications', 'HomeController@notifications')->name('notification.index');
 Route::post('/notificateions/delete', 'HomeController@delete_notification')->name('notification.delete');
+
+Route::get('/test_email', 'ProjectController@test_email');

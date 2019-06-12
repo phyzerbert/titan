@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMailable;
+use App\Mail\SendNotification;
 use App\Models\Project;
 use App\Models\Course;
 use App\Models\CourseUser;
@@ -13,13 +13,17 @@ use App\Models\Notification;
 use App\Models\Request as MoneyRequest;
 use App\User;
 use Auth;
+use App\Jobs\SendEmailJob;
 
 class ProjectController extends Controller
 {
     
+    protected $emails;
+    
     public function __construct()
     {
         $this->middleware('auth');
+        $this->emails = User::all()->pluck('email')->toArray();
     }
 
     public function index(Request $request){
@@ -44,7 +48,6 @@ class ProjectController extends Controller
             $to = substr($period, 14, 10);
             $mod = $mod->whereBetween('created_at', [$from, $to]);
         }
-
         $data = $mod->where('id', '>', 0)->orderBy('created_at', 'desc')->paginate(10);
 
         return view('project.index', compact('data', 'managers', 'companies', 'company_id', 'period'));
@@ -65,9 +68,10 @@ class ProjectController extends Controller
             'type' => 'create_project',
             'content' => $content,
         ]);
-        foreach (User::all() as $item) {
-            Mail::to($item->email)->send(new SendMailable($content));
-        }
+        // foreach (User::all() as $item) {
+        //     Mail::to($item->email)->send(new SendNotification($content));
+        // }
+        dispatch(new SendEmailJob($this->emails, $content));
         return back()->with('success', 'Created Successfully');
     }
 
@@ -154,9 +158,10 @@ class ProjectController extends Controller
             'link' => $course->id,
         ]);
 
-        foreach (User::all() as $item) {
-            Mail::to($item->email)->send(new SendMailable($content));
-        }
+        // foreach (User::all() as $item) {
+        //     Mail::to($item->email)->send(new SendNotification($content));
+        // }
+        dispatch(new SendEmailJob($this->emails, $content));
 
         return redirect(route('project.detail', $request->get('project_id')))->with('success', 'Created successfully');        
     }
@@ -182,9 +187,10 @@ class ProjectController extends Controller
                 'content' => $content,
                 'link' => $data['id'],
             ]);
-            foreach (User::all() as $item) {
-                Mail::to($item->email)->send(new SendMailable($content));
-            }
+            // foreach (User::all() as $item) {
+            //     Mail::to($item->email)->send(new SendNotification($content));
+            // }
+            dispatch(new SendEmailJob($this->emails, $content));
             $data['status'] = 4;
         }
         $course->update($data);
@@ -265,9 +271,10 @@ class ProjectController extends Controller
                 'type' => 'exceed_limit',
                 'content' => $content,
             ]);
-            foreach (User::all() as $item) {
-                Mail::to($item->email)->send(new SendMailable($content));
-            }
+            // foreach (User::all() as $item) {
+            //     Mail::to($item->email)->send(new SendNotification($content));
+            // }
+            dispatch(new SendEmailJob($this->emails, $content));
         }
         if($request->file('attachment') != null){
             $image = request()->file('attachment');
@@ -282,9 +289,10 @@ class ProjectController extends Controller
             'type' => 'new_request',
             'content' => $content,
         ]);
-        foreach (User::all() as $item) {
-            Mail::to($item->email)->send(new SendMailable($content));
-        }
+        // foreach (User::all() as $item) {
+        //     Mail::to($item->email)->send(new SendNotification($content));
+        // }
+        dispatch(new SendEmailJob($this->emails, $content));
         return back()->with('success', 'Requested Successfully');
     }
 
@@ -304,4 +312,10 @@ class ProjectController extends Controller
         $item->delete();
         return back()->with('success', 'Deleted Successfully');
     }
+
+    public function test_email(){
+        Mail::to("xian1017@outlook.com")->send(new SendNotification("Hi, This is mailtest."));
+    }
+
+
 }
